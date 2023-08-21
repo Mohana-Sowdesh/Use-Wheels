@@ -2,7 +2,7 @@
 Dot NET API Training project
 
 **Description**
-  To build APIs for second-hand cars selling site that displays various car models from different categories.
+   To build APIs for second-hand cars selling site that displays various car models from different categories.
   
 **Primary Actors involved**
 1. End-Users [buy vehicles from site]

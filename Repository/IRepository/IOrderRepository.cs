@@ -3,9 +3,9 @@ using Use_Wheels.Models.DTO;
 
 namespace Use_Wheels.Repository.IRepository
 {
-	public interface ICarRepository : IRepository<Car>
-	{
-		Task<Car> UpdateAsync(Car entity);
+	public interface IOrderRepository : IRepository<Orders>
+    {
+		
 	}
 }
 

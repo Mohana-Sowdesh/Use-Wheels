@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Use_Wheels.Models.DTO
 {
-	public class CarDTO
+	public class CarUpdateDTO
 	{
         [Required]
         [RegularExpression("^[A-Z]{2}\\s\\d{2}\\s[A-Z]{2}\\s\\d{4}$")]
@@ -16,6 +16,8 @@ namespace Use_Wheels.Models.DTO
 
         public string Description { get; set; }
 
+        public string Availability { get; set; }
+
         [Required]
         [RegularExpression("[1-9]")]
         public int Pre_Owner_Count { get; set; }
@@ -26,8 +28,6 @@ namespace Use_Wheels.Models.DTO
         [Required]
         [RegularExpression("^[1-9]\\d*$")]
         public float Price { get; set; }
-
-        public DateTime Created_Date { get; set; } = DateTime.Now;
 
         public DateTime Updated_Date { get; set; } = DateTime.Now;
 

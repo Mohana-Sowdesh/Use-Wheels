@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Use_Wheels.Data;
 using Use_Wheels.Models.DTO;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Use_Wheels.Controllers
 {
@@ -24,6 +26,7 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "customer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetCategories()
         {

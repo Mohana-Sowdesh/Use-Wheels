@@ -5,7 +5,8 @@ namespace Use_Wheels.Repository.IRepository
 {
 	public interface IUserRepository
 	{
-        bool IsUniqueUser(string username);
+        int IsUniqueUser(string username, string email);
+        bool IsAbove18(DateOnly Dob);
         Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO);
         Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO);
     }

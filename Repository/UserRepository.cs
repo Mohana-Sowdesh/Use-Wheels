@@ -35,14 +35,22 @@ namespace Use_Wheels.Repository
             _logger = logger;
         }
 
-        public bool IsUniqueUser(string username)
+        public int IsUniqueUser(string username, string email)
         {
             var user = _db.Users.FirstOrDefault(x => x.UserName == username);
-            if (user == null)
+            var userEmail = _db.Users.FirstOrDefault(x => x.Email == email);
+
+            if (user != null)
             {
-                return true;
+                _logger.LogError("Requested username already exists");
+                return -1;
             }
-            return false;
+            else if (userEmail != null)
+            {
+                _logger.LogError("Requested email already exists");
+                return 0;
+            }
+            return 1;
         }
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
@@ -74,7 +82,7 @@ namespace Use_Wheels.Repository
                     new Claim(ClaimTypes.Name, user.UserName.ToString()),
                     new Claim(ClaimTypes.Role, roles.FirstOrDefault())
                 }),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddHours(24),
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -104,8 +112,6 @@ namespace Use_Wheels.Repository
 
             try
             {
-                if (!IsAbove18(user.Dob))
-                    return null;
                 var result = await _userManager.CreateAsync(user, registerationRequestDTO.Password);
                 if (result.Succeeded)
                 {
@@ -136,12 +142,7 @@ namespace Use_Wheels.Repository
             if(currentYear - birthYear < 18)
             {
                 _logger.LogError("User age is not above or equal to 18");
-                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
-                {
-                    Content = new StringContent(string.Format("User must be above 18 years of age")),
-                    ReasonPhrase = "Registration unsuccessful"
-                };
-                throw new HttpResponseException(resp);
+                return false;
             }
             return true;
         }

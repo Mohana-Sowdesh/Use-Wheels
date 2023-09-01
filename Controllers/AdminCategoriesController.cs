@@ -28,7 +28,8 @@ namespace Use_Wheels.Controllers
             _response = new();
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCategory")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllCategories()
         {
@@ -74,6 +75,7 @@ namespace Use_Wheels.Controllers
         //}
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<APIResponse>> CreateCategory([FromBody] CategoryDTO categoryDTO)
@@ -112,7 +114,7 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id:int}", Name = "DeleteCategory")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> DeleteCategory(int id)
         {
             try

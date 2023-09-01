@@ -18,7 +18,7 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpPost("logout")]
-        //[Authorize] 
+        [Authorize] 
         public IActionResult Logout()
         {
             _response.StatusCode = HttpStatusCode.OK;

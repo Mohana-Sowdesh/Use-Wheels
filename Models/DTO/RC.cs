@@ -7,40 +7,41 @@ namespace Use_Wheels.Models.DTO
 	public class RC
 	{
 		[Key]
-        [RegularExpression("0-9{6}")]
+        [RegularExpression("[0-9]{6}")]
         public string RC_No { get; set; }
 
-		[Required]
-		[ForeignKey("Vehicle No")]
-		public string Vehicle_No;
+  //      [ForeignKey("")]
+		public string Vehicle_No { get; set; }
 
-		[Required]
+  //      public Car Car { get; set; }
+
+        [Required]
 		public DateOnly Date_Of_Reg { get; set; }
 
 		[Required]
 		public DateOnly Reg_Valid_Upto { get; set; }
 
 		[Required]
-        [RegularExpression("a-zA-Z\\s")]
+        //[RegularExpression("[a-zA-Z]+\\s")]
         public string Owner_Name { get; set; }
 
         [Required]
-        [RegularExpression("a-zA-Z0-9\\s")]
+        //[RegularExpression("[a-zA-Z]+\\s")]
         public string Owner_Address { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zA-Z-]+$")]
+        //[RegularExpression("^[A-Za-z]+-?[A-Za-z]+$")]
         public string Board_Type { get; set; }
 
         [Required]
         public DateOnly FC_Validity { get; set; }
 
 		[Required]
-        [RegularExpression("^[a-zA-Z\\s]+$")]
+        //[RegularExpression("^[a-zA-Z\\s]+$")]
         public string Insurance_Type { get; set; }
 
 		[Required]
-        [RegularExpression("^[a-zA-Z0-9]+$")]
+        //[RegularExpression("^[A-Za-z]+?[0-9]*$")]
         public string Car_Model { get; set; }
 
         [Required]
@@ -55,9 +56,9 @@ namespace Use_Wheels.Models.DTO
         [RegularExpression("^[a-zA-Z\\s]+$")]
         public string Colour { get; set; }
 
-        public DateTime Created_Date { get; set; }
+        public DateTime Created_Date { get; set; } = DateTime.Now;
 
-        public DateTime Updated_Date { get; set; }
+        public DateTime Updated_Date { get; set; } = DateTime.Now;
     }
 }
 

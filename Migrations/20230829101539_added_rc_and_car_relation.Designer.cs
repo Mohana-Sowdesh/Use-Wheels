@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Use_Wheels.Data;
 
@@ -10,9 +11,11 @@ using Use_Wheels.Data;
 namespace Use_Wheels.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230829101539_added_rc_and_car_relation")]
+    partial class added_rc_and_car_relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,7 +183,6 @@ namespace Use_Wheels.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("RC_No")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("Updated_Date")
@@ -193,22 +195,6 @@ namespace Use_Wheels.Migrations
                     b.HasIndex("RC_No");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Vehicle_No = "DL 89 JU 9921",
-                            Availability = "available",
-                            Category_Id = 1,
-                            Created_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9970),
-                            Description = "Some description",
-                            Img_URL = "D://car1.jpg",
-                            Likes = 0,
-                            Pre_Owner_Count = 2,
-                            Price = 2500000f,
-                            RC_No = "635289",
-                            Updated_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9970)
-                        });
                 });
 
             modelBuilder.Entity("Use_Wheels.Models.DTO.Category", b =>
@@ -249,16 +235,15 @@ namespace Use_Wheels.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<float>("Net_Price")
                         .HasColumnType("float");
 
                     b.Property<string>("Payment_Type")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("User_ID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Vehicle_No")
                         .IsRequired()
@@ -327,26 +312,6 @@ namespace Use_Wheels.Migrations
                     b.HasKey("RC_No");
 
                     b.ToTable("RC");
-
-                    b.HasData(
-                        new
-                        {
-                            RC_No = "635289",
-                            Board_Type = "Own board",
-                            Car_Model = "Honda CR-V",
-                            Colour = "Red",
-                            Created_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9950),
-                            Date_Of_Reg = new DateOnly(2001, 3, 1),
-                            FC_Validity = new DateOnly(2025, 3, 1),
-                            Fuel_Type = "Diesel",
-                            Insurance_Type = "Third party",
-                            Manufactured_Year = 2004,
-                            Owner_Address = "Vasanth Vihar",
-                            Owner_Name = "Ram",
-                            Reg_Valid_Upto = new DateOnly(2031, 3, 1),
-                            Updated_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9950),
-                            Vehicle_No = "DL 89 JU 9921"
-                        });
                 });
 
             modelBuilder.Entity("Use_Wheels.Models.DTO.UserDTO", b =>
@@ -495,15 +460,28 @@ namespace Use_Wheels.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Use_Wheels.Models.DTO.RC", "Rc_Details")
+                    b.HasOne("Use_Wheels.Models.DTO.RC", null)
                         .WithMany()
-                        .HasForeignKey("RC_No")
+                        .HasForeignKey("RC_No");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Use_Wheels.Models.DTO.RC", b =>
+                {
+                    b.HasOne("Use_Wheels.Models.DTO.Car", "Car")
+                        .WithOne("Rc_Details")
+                        .HasForeignKey("Use_Wheels.Models.DTO.RC", "RC_No")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Car");
+                });
 
-                    b.Navigation("Rc_Details");
+            modelBuilder.Entity("Use_Wheels.Models.DTO.Car", b =>
+                {
+                    b.Navigation("Rc_Details")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

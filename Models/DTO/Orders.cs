@@ -10,8 +10,8 @@ namespace Use_Wheels.Models.DTO
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Order_ID { get; set; }
 
-		[ForeignKey("User ID")]
-		public int User_ID { get; set; }
+		[ForeignKey("Email")]
+		public string Email { get; set; }
 		public UserDTO User;
 
 		[ForeignKey("Vehicle ID")]

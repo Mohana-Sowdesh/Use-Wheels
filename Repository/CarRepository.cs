@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Use_Wheels.Data;
 using Use_Wheels.Models.DTO;
 using Use_Wheels.Repository.IRepository;
@@ -12,6 +15,14 @@ namespace Use_Wheels.Repository
         public CarRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public async Task<Car> UpdateAsync(Car entity)
+        {
+            entity.Updated_Date = DateTime.Now;
+            _db.Cars.Update(entity);
+            await _db.SaveChangesAsync();
+            return entity;
         }
     }
 }

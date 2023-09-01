@@ -23,7 +23,7 @@ namespace Use_Wheels.Repository
             await SaveAsync();
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
+        public virtual async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             if (!tracked)
@@ -45,7 +45,7 @@ namespace Use_Wheels.Repository
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null,
+        public virtual async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null,
             int pageSize = 0, int pageNumber = 1)
         {
             IQueryable<T> query = dbSet;
@@ -72,7 +72,7 @@ namespace Use_Wheels.Repository
             return await query.ToListAsync();
         }
 
-        public async Task RemoveAsync(T entity)
+        public virtual async Task RemoveAsync(T entity)
         {
             dbSet.Remove(entity);
             await SaveAsync();

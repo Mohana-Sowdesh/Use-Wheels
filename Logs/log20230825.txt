@@ -1,0 +1,756 @@
+2023-08-25 15:30:43.285 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 15:30:43.688 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 15:30:43.689 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 15:30:43.689 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 15:30:43.689 +05:30 [INF] Hosting environment: Development
+2023-08-25 15:30:43.689 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 15:30:44.793 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 15:30:44.845 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 51.9680ms
+2023-08-25 15:30:44.852 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/swagger-ui-bundle.js - -
+2023-08-25 15:30:44.971 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2023-08-25 15:30:44.972 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/swagger-ui-bundle.js - - - 200 1061536 text/javascript 119.3015ms
+2023-08-25 15:30:45.049 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 15:30:45.163 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 114.1092ms
+2023-08-25 15:30:55.141 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars - -
+2023-08-25 15:30:55.146 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 15:30:55.166 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 15:30:55.670 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+2023-08-25 15:30:55.693 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 15:30:55.700 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels) in 533.1059ms
+2023-08-25 15:30:55.701 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 15:30:55.703 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars - - - 200 - application/json;+charset=utf-8 561.5509ms
+2023-08-25 15:31:25.571 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars/HP 8767 GH 9877 - -
+2023-08-25 15:31:25.573 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels)'
+2023-08-25 15:31:25.583 +05:30 [INF] Route matched with {action = "GetCarById", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCarById(System.String) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 15:31:25.689 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 15:31:25.689 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 15:31:25.690 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels) in 105.9425ms
+2023-08-25 15:31:25.690 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels)'
+2023-08-25 15:31:25.690 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars/HP 8767 GH 9877 - - - 200 - application/json;+charset=utf-8 118.4828ms
+2023-08-25 15:55:57.057 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 15:55:57.303 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 15:55:57.304 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 15:55:57.305 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 15:55:57.305 +05:30 [INF] Hosting environment: Development
+2023-08-25 15:55:57.305 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 15:55:58.381 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 15:55:58.433 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 52.5611ms
+2023-08-25 15:55:58.535 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 15:55:58.648 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 112.8681ms
+2023-08-25 15:56:03.911 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars - -
+2023-08-25 15:56:03.924 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 15:56:03.943 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 15:56:04.417 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+2023-08-25 15:56:04.440 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 15:56:04.448 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels) in 503.4814ms
+2023-08-25 15:56:04.448 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 15:56:04.451 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars - - - 200 - application/json;+charset=utf-8 539.1674ms
+2023-08-25 15:56:27.441 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars/DL 89 JU 9921 - -
+2023-08-25 15:56:27.443 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels)'
+2023-08-25 15:56:27.458 +05:30 [INF] Route matched with {action = "GetCarById", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCarById(System.String) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 15:56:27.592 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 15:56:27.592 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 15:56:27.593 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels) in 134.462ms
+2023-08-25 15:56:27.593 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels)'
+2023-08-25 15:56:27.593 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars/DL 89 JU 9921 - - - 200 - application/json;+charset=utf-8 151.8205ms
+2023-08-25 15:58:02.189 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 15:58:02.412 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 15:58:02.413 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 15:58:02.414 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 15:58:02.414 +05:30 [INF] Hosting environment: Development
+2023-08-25 15:58:02.414 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 15:58:03.531 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 15:58:03.582 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 50.9878ms
+2023-08-25 15:58:03.632 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 15:58:03.749 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 117.9204ms
+2023-08-25 16:00:43.676 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 16:00:43.909 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 16:00:43.910 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 16:00:43.911 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 16:00:43.911 +05:30 [INF] Hosting environment: Development
+2023-08-25 16:00:43.911 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 16:00:45.034 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 16:00:45.085 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 51.3015ms
+2023-08-25 16:00:45.134 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 16:00:45.253 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 118.5476ms
+2023-08-25 16:01:38.392 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7192/admin/cars application/json 251
+2023-08-25 16:01:38.405 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:01:38.426 +05:30 [INF] Route matched with {action = "AddCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] AddCar(Use_Wheels.Models.DTO.CarDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:01:38.811 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.SerializableError'.
+2023-08-25 16:01:38.813 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels) in 386.6676ms
+2023-08-25 16:01:38.814 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:01:38.815 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7192/admin/cars application/json 251 - 400 - application/json;+charset=utf-8 423.6189ms
+2023-08-25 16:02:19.165 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7192/admin/cars application/json 251
+2023-08-25 16:02:19.166 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:02:19.166 +05:30 [INF] Route matched with {action = "AddCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] AddCar(Use_Wheels.Models.DTO.CarDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:02:19.212 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.SerializableError'.
+2023-08-25 16:02:19.212 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels) in 45.8696ms
+2023-08-25 16:02:19.213 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:02:19.213 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7192/admin/cars application/json 251 - 400 - application/json;+charset=utf-8 48.1661ms
+2023-08-25 16:02:25.834 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7192/admin/cars application/json 251
+2023-08-25 16:02:25.835 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:02:25.835 +05:30 [INF] Route matched with {action = "AddCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] AddCar(Use_Wheels.Models.DTO.CarDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:02:25.855 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.SerializableError'.
+2023-08-25 16:02:25.855 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels) in 20.1844ms
+2023-08-25 16:02:25.855 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:02:25.856 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7192/admin/cars application/json 251 - 400 - application/json;+charset=utf-8 21.1941ms
+2023-08-25 16:06:05.183 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 16:06:05.397 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 16:06:05.398 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 16:06:05.398 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 16:06:05.398 +05:30 [INF] Hosting environment: Development
+2023-08-25 16:06:05.399 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 16:06:06.545 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 16:06:06.596 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 51.5086ms
+2023-08-25 16:06:06.648 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 16:06:06.763 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 114.5947ms
+2023-08-25 16:06:14.474 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars - -
+2023-08-25 16:06:14.481 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 16:06:14.501 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:06:14.970 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+2023-08-25 16:06:14.993 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 16:06:15.001 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels) in 498.5359ms
+2023-08-25 16:06:15.002 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 16:06:15.004 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars - - - 200 - application/json;+charset=utf-8 530.0320ms
+2023-08-25 16:06:31.227 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars/DL 89 JU 9921 - -
+2023-08-25 16:06:31.229 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels)'
+2023-08-25 16:06:31.243 +05:30 [INF] Route matched with {action = "GetCarById", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCarById(System.String) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:06:31.396 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 16:06:31.397 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 16:06:31.397 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels) in 153.3726ms
+2023-08-25 16:06:31.397 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetCarById (Use Wheels)'
+2023-08-25 16:06:31.397 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars/DL 89 JU 9921 - - - 200 - application/json;+charset=utf-8 170.3458ms
+2023-08-25 16:07:13.566 +05:30 [INF] Request starting HTTP/1.1 DELETE https://localhost:7192/admin/cars/UP 56 JU 5624 - -
+2023-08-25 16:07:13.567 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.DeleteCar (Use Wheels)'
+2023-08-25 16:07:13.570 +05:30 [INF] Route matched with {action = "DeleteCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] DeleteCar(System.String) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:07:13.832 +05:30 [INF] Executed DbCommand (30ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 16:07:13.915 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `Cars`
+WHERE `Vehicle_No` = @p0;
+SELECT ROW_COUNT();
+2023-08-25 16:07:13.919 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 16:07:13.920 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.DeleteCar (Use Wheels) in 349.5801ms
+2023-08-25 16:07:13.920 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.DeleteCar (Use Wheels)'
+2023-08-25 16:07:13.920 +05:30 [INF] Request finished HTTP/1.1 DELETE https://localhost:7192/admin/cars/UP 56 JU 5624 - - - 200 - application/json;+charset=utf-8 353.1711ms
+2023-08-25 16:08:56.524 +05:30 [INF] Request starting HTTP/1.1 DELETE https://localhost:7192/admin/cars/HP 8767 GH 9877 - -
+2023-08-25 16:08:56.525 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.DeleteCar (Use Wheels)'
+2023-08-25 16:08:56.525 +05:30 [INF] Route matched with {action = "DeleteCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] DeleteCar(System.String) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:08:56.802 +05:30 [INF] Executed DbCommand (215ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 16:08:57.010 +05:30 [INF] Executed DbCommand (106ms) [Parameters=[@p0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `Cars`
+WHERE `Vehicle_No` = @p0;
+SELECT ROW_COUNT();
+2023-08-25 16:08:57.012 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 16:08:57.013 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.DeleteCar (Use Wheels) in 487.7122ms
+2023-08-25 16:08:57.013 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.DeleteCar (Use Wheels)'
+2023-08-25 16:08:57.013 +05:30 [INF] Request finished HTTP/1.1 DELETE https://localhost:7192/admin/cars/HP 8767 GH 9877 - - - 200 - application/json;+charset=utf-8 489.0351ms
+2023-08-25 16:12:15.916 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 16:12:16.183 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 16:12:16.184 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 16:12:16.210 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 16:12:16.210 +05:30 [INF] Hosting environment: Development
+2023-08-25 16:12:16.210 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 16:12:17.260 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 16:12:17.310 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 50.6844ms
+2023-08-25 16:12:17.361 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 16:12:17.480 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 119.0242ms
+2023-08-25 16:13:46.650 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7192/admin/cars application/json 247
+2023-08-25 16:13:46.658 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:13:46.674 +05:30 [INF] Route matched with {action = "AddCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] AddCar(Use_Wheels.Models.DTO.CarDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:13:47.070 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.SerializableError'.
+2023-08-25 16:13:47.072 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels) in 396.3801ms
+2023-08-25 16:13:47.072 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:13:47.074 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7192/admin/cars application/json 247 - 400 - application/json;+charset=utf-8 424.2230ms
+2023-08-25 16:16:11.446 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7192/admin/cars application/json 252
+2023-08-25 16:16:11.447 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:16:11.448 +05:30 [INF] Route matched with {action = "AddCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] AddCar(Use_Wheels.Models.DTO.CarDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:16:11.736 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE LOWER(`c`.`Vehicle_No`) = @__ToLower_0
+LIMIT 1
+2023-08-25 16:16:11.800 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Single), @p9='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `Cars` (`Vehicle_No`, `Availability`, `Category_Id`, `Created_Date`, `Description`, `Img_URL`, `Likes`, `Pre_Owner_Count`, `Price`, `Updated_Date`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2023-08-25 16:16:11.804 +05:30 [INF] Executing CreatedAtRouteResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 16:16:11.813 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels) in 365.3913ms
+2023-08-25 16:16:11.813 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.AddCar (Use Wheels)'
+2023-08-25 16:16:11.815 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7192/admin/cars application/json 252 - 201 - application/json;+charset=utf-8 369.0823ms
+2023-08-25 16:18:06.488 +05:30 [INF] Request starting HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 217
+2023-08-25 16:18:06.489 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels)'
+2023-08-25 16:18:06.494 +05:30 [INF] Route matched with {action = "UpdateVilla", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] UpdateVilla(System.String, Use_Wheels.Models.DTO.CarUpdateDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:18:06.519 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.SerializableError'.
+2023-08-25 16:18:06.519 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels) in 24.682ms
+2023-08-25 16:18:06.519 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels)'
+2023-08-25 16:18:06.520 +05:30 [INF] Request finished HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 217 - 400 - application/json;+charset=utf-8 31.1520ms
+2023-08-25 16:18:56.663 +05:30 [INF] Request starting HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236
+2023-08-25 16:18:56.665 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels)'
+2023-08-25 16:18:56.665 +05:30 [INF] Route matched with {action = "UpdateVilla", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] UpdateVilla(System.String, Use_Wheels.Models.DTO.CarUpdateDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:18:56.673 +05:30 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2023-08-25 16:18:56.675 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels) in 9.3355ms
+2023-08-25 16:18:56.675 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels)'
+2023-08-25 16:18:56.675 +05:30 [INF] Request finished HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236 - 400 - application/problem+json;+charset=utf-8 12.2102ms
+2023-08-25 16:21:14.217 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 16:21:14.446 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 16:21:14.446 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 16:21:14.446 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 16:21:14.447 +05:30 [INF] Hosting environment: Development
+2023-08-25 16:21:14.447 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 16:21:15.543 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 16:21:15.592 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 49.2350ms
+2023-08-25 16:21:15.644 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 16:21:15.761 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 117.1702ms
+2023-08-25 16:21:34.696 +05:30 [INF] Request starting HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236
+2023-08-25 16:21:34.704 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels)'
+2023-08-25 16:21:34.728 +05:30 [INF] Route matched with {action = "UpdateVilla", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] UpdateVilla(System.String, Use_Wheels.Models.DTO.CarUpdateDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 16:21:35.106 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2023-08-25 16:21:35.107 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels) in 378.0364ms
+2023-08-25 16:21:35.108 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateVilla (Use Wheels)'
+2023-08-25 16:21:35.109 +05:30 [INF] Request finished HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236 - 400 - text/plain;+charset=utf-8 413.0920ms
+2023-08-25 17:46:54.136 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 17:46:54.427 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 17:46:54.428 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 17:46:54.429 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 17:46:54.429 +05:30 [INF] Hosting environment: Development
+2023-08-25 17:46:54.429 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 17:46:56.474 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 17:46:56.528 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 54.7100ms
+2023-08-25 17:46:56.582 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 17:46:56.699 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 116.7469ms
+2023-08-25 17:47:03.477 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/admin/cars - -
+2023-08-25 17:47:03.486 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 17:47:03.507 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 17:47:03.970 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+2023-08-25 17:47:03.992 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 17:47:04.001 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels) in 492.8688ms
+2023-08-25 17:47:04.001 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.GetAllCars (Use Wheels)'
+2023-08-25 17:47:04.003 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/admin/cars - - - 200 - application/json;+charset=utf-8 526.3339ms
+2023-08-25 17:49:56.153 +05:30 [INF] Request starting HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236
+2023-08-25 17:49:56.158 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateCar (Use Wheels)'
+2023-08-25 17:49:56.173 +05:30 [INF] Route matched with {action = "UpdateCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] UpdateCar(System.String, Use_Wheels.Models.DTO.CarUpdateDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 17:49:56.300 +05:30 [INF] Executing ObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 17:49:56.300 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.UpdateCar (Use Wheels) in 127.343ms
+2023-08-25 17:49:56.300 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateCar (Use Wheels)'
+2023-08-25 17:49:56.300 +05:30 [INF] Request finished HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236 - 200 - application/json;+charset=utf-8 147.3175ms
+2023-08-25 17:50:55.499 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 17:50:55.726 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 17:50:55.727 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 17:50:55.727 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 17:50:55.727 +05:30 [INF] Hosting environment: Development
+2023-08-25 17:50:55.727 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 17:50:56.852 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 17:50:56.901 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 49.4530ms
+2023-08-25 17:50:56.953 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 17:50:57.067 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 113.9702ms
+2023-08-25 17:51:31.384 +05:30 [INF] Request starting HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236
+2023-08-25 17:51:31.397 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateCar (Use Wheels)'
+2023-08-25 17:51:31.415 +05:30 [INF] Route matched with {action = "UpdateCar", controller = "AdminCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] UpdateCar(System.String, Use_Wheels.Models.DTO.CarUpdateDTO) on controller Use_Wheels.Controllers.AdminCarController (Use Wheels).
+2023-08-25 17:51:31.982 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@p9='?' (Size = 255), @p0='?' (Size = 4000), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Single), @p8='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+UPDATE `Cars` SET `Availability` = @p0, `Category_Id` = @p1, `Created_Date` = @p2, `Description` = @p3, `Img_URL` = @p4, `Likes` = @p5, `Pre_Owner_Count` = @p6, `Price` = @p7, `Updated_Date` = @p8
+WHERE `Vehicle_No` = @p9;
+SELECT ROW_COUNT();
+2023-08-25 17:51:31.993 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 17:51:31.997 +05:30 [INF] Executed action Use_Wheels.Controllers.AdminCarController.UpdateCar (Use Wheels) in 580.7856ms
+2023-08-25 17:51:31.997 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.AdminCarController.UpdateCar (Use Wheels)'
+2023-08-25 17:51:32.000 +05:30 [INF] Request finished HTTP/1.1 PUT https://localhost:7192/admin/cars/FK 46 PH 5511 application/json 236 - 200 - application/json;+charset=utf-8 616.2474ms
+2023-08-25 17:54:25.277 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars - -
+2023-08-25 17:54:25.305 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels)'
+2023-08-25 17:54:25.313 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 17:54:25.433 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+2023-08-25 17:54:25.437 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 17:54:25.439 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels) in 126.5252ms
+2023-08-25 17:54:25.439 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels)'
+2023-08-25 17:54:25.439 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars - - - 200 - application/json;+charset=utf-8 162.8920ms
+2023-08-25 17:55:26.539 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 17:55:26.769 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 17:55:26.770 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 17:55:26.771 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 17:55:26.771 +05:30 [INF] Hosting environment: Development
+2023-08-25 17:55:26.771 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 17:55:27.879 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 17:55:27.929 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 50.9583ms
+2023-08-25 17:55:27.984 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 17:55:28.100 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 116.8375ms
+2023-08-25 17:55:40.507 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars - -
+2023-08-25 17:55:40.516 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels)'
+2023-08-25 17:55:40.537 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 17:55:41.023 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 17:55:41.048 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 17:55:41.057 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels) in 519.2838ms
+2023-08-25 17:55:41.058 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels)'
+2023-08-25 17:55:41.060 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars - - - 200 - application/json;+charset=utf-8 553.6408ms
+2023-08-25 18:05:59.736 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:05:59.997 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:05:59.997 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:05:59.998 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:05:59.998 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:05:59.998 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:06:01.084 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:06:01.134 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 49.4507ms
+2023-08-25 18:06:01.185 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:06:01.288 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET user/cars" for actions - Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels),Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-08-25 18:06:01.300 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 500 - text/plain;+charset=utf-8 114.4330ms
+2023-08-25 18:06:31.530 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:06:31.759 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:06:31.760 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:06:31.760 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:06:31.760 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:06:31.760 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:06:32.871 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:06:32.921 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 50.2271ms
+2023-08-25 18:06:32.972 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:06:33.076 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET user/cars" for actions - Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels),Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-08-25 18:06:33.087 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 500 - text/plain;+charset=utf-8 115.5017ms
+2023-08-25 18:07:22.632 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:07:22.858 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:07:22.858 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:07:22.858 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:07:22.858 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:07:22.858 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:07:23.940 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:07:23.990 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 50.5707ms
+2023-08-25 18:07:24.042 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:07:24.162 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 120.4361ms
+2023-08-25 18:07:35.012 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars - -
+2023-08-25 18:07:35.023 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels)'
+2023-08-25 18:07:35.041 +05:30 [INF] Route matched with {action = "GetAllCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetAllCars() on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:07:35.527 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 18:07:35.551 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:07:35.559 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels) in 516.5174ms
+2023-08-25 18:07:35.559 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetAllCars (Use Wheels)'
+2023-08-25 18:07:35.562 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars - - - 200 - application/json;+charset=utf-8 549.7521ms
+2023-08-25 18:07:58.306 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars/DL 89 JU 9921 - -
+2023-08-25 18:07:58.308 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCarById (Use Wheels)'
+2023-08-25 18:07:58.321 +05:30 [INF] Route matched with {action = "GetCarById", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCarById(System.String) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:07:58.423 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 18:07:58.424 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:07:58.424 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCarById (Use Wheels) in 102.5697ms
+2023-08-25 18:07:58.424 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCarById (Use Wheels)'
+2023-08-25 18:07:58.424 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars/DL 89 JU 9921 - - - 200 - application/json;+charset=utf-8 118.5950ms
+2023-08-25 18:10:56.392 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:10:56.651 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:10:56.651 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:10:56.652 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:10:56.652 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:10:56.652 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:10:57.741 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:10:57.792 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 51.1526ms
+2023-08-25 18:10:57.844 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:10:57.961 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 116.4579ms
+2023-08-25 18:11:09.772 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - -
+2023-08-25 18:11:09.780 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:11:09.785 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:11:09.788 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The 'Default30' cache profile is not defined.
+   at Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.GetCacheProfile(MvcOptions options)
+   at Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.CreateInstance(IServiceProvider serviceProvider)
+   at Microsoft.AspNetCore.Mvc.Filters.DefaultFilterProvider.ProvideFilter(FilterProviderContext context, FilterItem filterItem)
+   at Microsoft.AspNetCore.Mvc.Filters.DefaultFilterProvider.OnProvidersExecuting(FilterProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Filters.FilterFactory.CreateUncachedFiltersCore(IFilterProvider[] filterProviders, ActionContext actionContext, List`1 filterItems)
+   at Microsoft.AspNetCore.Mvc.Filters.FilterFactory.GetAllFilters(IFilterProvider[] filterProviders, ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvokerCache.GetCachedResult(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerRequestDelegateFactory.<>c__DisplayClass12_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-08-25 18:11:09.808 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - - - 500 - text/plain;+charset=utf-8 35.8438ms
+2023-08-25 18:11:26.310 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:11:26.500 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:11:26.501 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:11:26.501 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:11:26.502 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:11:26.502 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:11:27.597 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:11:27.649 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 52.8277ms
+2023-08-25 18:11:27.703 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:11:27.825 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 121.6325ms
+2023-08-25 18:11:36.219 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - -
+2023-08-25 18:11:36.230 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:11:36.258 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:11:36.757 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+2023-08-25 18:11:36.785 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:11:36.793 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 533.3345ms
+2023-08-25 18:11:36.793 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:11:36.796 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 576.7103ms
+2023-08-25 18:12:32.429 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:12:32.646 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:12:32.647 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:12:32.648 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:12:32.648 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:12:32.648 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:12:33.767 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:12:33.818 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 51.3132ms
+2023-08-25 18:12:33.869 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:12:33.987 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 117.6485ms
+2023-08-25 18:12:39.765 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - -
+2023-08-25 18:12:39.772 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:12:39.797 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:12:40.300 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 18:12:40.328 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:12:40.336 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 537.6511ms
+2023-08-25 18:12:40.336 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:12:40.338 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 573.3393ms
+2023-08-25 18:14:26.382 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?search=DL%2089%20JU%20992&pageSize=0&pageNumber=1 - -
+2023-08-25 18:14:26.383 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:14:26.384 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:14:26.479 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 18:14:26.593 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:14:26.594 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 210.0083ms
+2023-08-25 18:14:26.594 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:14:26.595 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?search=DL%2089%20JU%20992&pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 213.7275ms
+2023-08-25 18:19:14.924 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:19:15.163 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:19:15.163 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:19:15.164 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:19:15.164 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:19:15.164 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:19:16.260 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:19:16.312 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 51.8880ms
+2023-08-25 18:19:16.364 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:19:16.480 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 116.8314ms
+2023-08-25 18:19:28.999 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - -
+2023-08-25 18:19:29.010 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:19:29.033 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:19:29.519 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 18:19:29.548 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:19:29.556 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 521.5325ms
+2023-08-25 18:19:29.556 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:19:29.558 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 559.2019ms
+2023-08-25 18:19:41.831 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars/DL 89 JU 9921 - -
+2023-08-25 18:19:41.833 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCarById (Use Wheels)'
+2023-08-25 18:19:41.837 +05:30 [INF] Route matched with {action = "GetCarById", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCarById(System.String) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:19:41.943 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__vehicle_no_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Vehicle_No` = @__vehicle_no_0
+LIMIT 1
+2023-08-25 18:19:41.944 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:19:41.944 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCarById (Use Wheels) in 106.7197ms
+2023-08-25 18:19:41.944 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCarById (Use Wheels)'
+2023-08-25 18:19:41.944 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars/DL 89 JU 9921 - - - 200 - application/json;+charset=utf-8 113.1795ms
+2023-08-25 18:19:58.784 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?search=DL%2089%20JU%209921&pageSize=0&pageNumber=1 - -
+2023-08-25 18:19:58.785 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:19:58.785 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:19:59.006 +05:30 [INF] Executed DbCommand (99ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 18:19:59.017 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:19:59.018 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 233.3724ms
+2023-08-25 18:19:59.019 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:19:59.019 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?search=DL%2089%20JU%209921&pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 234.6522ms
+2023-08-25 18:20:32.758 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=0&pageNumber=1 - -
+2023-08-25 18:20:32.785 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:20:32.785 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:20:32.972 +05:30 [INF] Executed DbCommand (172ms) [Parameters=[@__categoryId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+2023-08-25 18:20:32.975 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:20:32.975 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 190.2192ms
+2023-08-25 18:20:32.976 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:20:32.976 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 218.0491ms
+2023-08-25 18:20:36.358 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=0&pageNumber=1 - -
+2023-08-25 18:20:36.358 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:20:36.359 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:20:36.437 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@__categoryId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+2023-08-25 18:20:36.610 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:20:36.611 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 251.964ms
+2023-08-25 18:20:36.611 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:20:36.611 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 253.8027ms
+2023-08-25 18:21:03.196 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - -
+2023-08-25 18:21:03.222 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:03.222 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:03.233 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-08-25 18:21:03.233 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-08-25 18:21:03.439 +05:30 [INF] Executed DbCommand (101ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:03.440 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:03.441 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 218.8909ms
+2023-08-25 18:21:03.441 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:03.442 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 245.6480ms
+2023-08-25 18:21:09.810 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=1 - -
+2023-08-25 18:21:09.810 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:09.810 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:09.839 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:10.015 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:10.016 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 205.6107ms
+2023-08-25 18:21:10.016 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:10.016 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 206.1301ms
+2023-08-25 18:21:20.784 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=2&pageNumber=1 - -
+2023-08-25 18:21:20.785 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:20.785 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:20.836 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:21.034 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:21.035 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 249.9845ms
+2023-08-25 18:21:21.035 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:21.036 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=2&pageNumber=1 - - - 200 - application/json;+charset=utf-8 251.2356ms
+2023-08-25 18:21:27.549 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=3&pageSize=2&pageNumber=1 - -
+2023-08-25 18:21:27.549 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:27.549 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:27.557 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:27.558 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:27.558 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 8.2505ms
+2023-08-25 18:21:27.558 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:27.558 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=3&pageSize=2&pageNumber=1 - - - 200 - application/json;+charset=utf-8 9.1160ms
+2023-08-25 18:21:34.986 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=2&pageNumber=1 - -
+2023-08-25 18:21:34.987 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:34.987 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:35.067 +05:30 [INF] Executed DbCommand (49ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:35.068 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:35.069 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 82.0808ms
+2023-08-25 18:21:35.069 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:35.069 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=2&pageNumber=1 - - - 200 - application/json;+charset=utf-8 83.2988ms
+2023-08-25 18:21:44.694 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=2&pageNumber=1 - -
+2023-08-25 18:21:44.694 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:44.694 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:44.848 +05:30 [INF] Executed DbCommand (124ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:44.849 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:44.849 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 154.6019ms
+2023-08-25 18:21:44.849 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:44.849 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=2&pageNumber=1 - - - 200 - application/json;+charset=utf-8 155.6482ms
+2023-08-25 18:21:50.462 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - -
+2023-08-25 18:21:50.463 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:50.463 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:50.541 +05:30 [INF] Executed DbCommand (72ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:50.542 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:50.543 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 79.4765ms
+2023-08-25 18:21:50.543 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:50.543 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 80.4805ms
+2023-08-25 18:21:53.568 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - -
+2023-08-25 18:21:53.569 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:53.569 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:21:53.771 +05:30 [INF] Executed DbCommand (101ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:21:53.773 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:21:53.773 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 204.2593ms
+2023-08-25 18:21:53.773 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:21:53.774 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 205.3296ms
+2023-08-25 18:22:00.979 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - -
+2023-08-25 18:22:00.980 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:22:00.980 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:22:00.982 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-08-25 18:22:00.982 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-08-25 18:22:01.091 +05:30 [INF] Executed DbCommand (56ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+LIMIT @__p_1 OFFSET @__p_0
+2023-08-25 18:22:01.093 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:22:01.093 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 113.2022ms
+2023-08-25 18:22:01.093 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:22:01.093 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?search=DL%2089%20JU%209921&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 114.2345ms
+2023-08-25 18:22:25.993 +05:30 [INF] User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-08-25 18:22:26.191 +05:30 [INF] Now listening on: https://localhost:7192
+2023-08-25 18:22:26.191 +05:30 [INF] Now listening on: http://localhost:5271
+2023-08-25 18:22:26.192 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 18:22:26.192 +05:30 [INF] Hosting environment: Development
+2023-08-25 18:22:26.192 +05:30 [INF] Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-08-25 18:22:27.299 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-08-25 18:22:27.347 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 49.0121ms
+2023-08-25 18:22:27.399 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-08-25 18:22:27.517 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 117.5317ms
+2023-08-25 18:22:44.172 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - -
+2023-08-25 18:22:44.181 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:22:44.205 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:22:44.720 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Availability` = 'available'
+2023-08-25 18:22:44.749 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:22:44.756 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 550.2186ms
+2023-08-25 18:22:44.757 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:22:44.759 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 586.9657ms
+2023-08-25 18:22:54.569 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=0&pageNumber=1 - -
+2023-08-25 18:22:54.571 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:22:54.571 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:22:54.678 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__categoryId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+2023-08-25 18:22:54.678 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:22:54.679 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 107.3497ms
+2023-08-25 18:22:54.679 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:22:54.679 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=0&pageNumber=1 - - - 200 - application/json;+charset=utf-8 109.7080ms
+2023-08-25 18:23:02.118 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=1 - -
+2023-08-25 18:23:02.119 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:02.119 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:23:02.144 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-08-25 18:23:02.146 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-08-25 18:23:02.327 +05:30 [INF] Executed DbCommand (75ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:23:02.329 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:23:02.330 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 210.6469ms
+2023-08-25 18:23:02.330 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:02.330 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 211.9276ms
+2023-08-25 18:23:06.958 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=2&pageNumber=1 - -
+2023-08-25 18:23:06.958 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:06.958 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:23:07.114 +05:30 [INF] Executed DbCommand (123ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:23:07.115 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:23:07.116 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 157.2292ms
+2023-08-25 18:23:07.116 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:07.116 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=2&pageNumber=1 - - - 200 - application/json;+charset=utf-8 158.1024ms
+2023-08-25 18:23:12.659 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=5&pageNumber=1 - -
+2023-08-25 18:23:12.659 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:12.659 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:23:12.785 +05:30 [INF] Executed DbCommand (75ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:23:12.975 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:23:12.976 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 316.6713ms
+2023-08-25 18:23:12.976 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:12.976 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=5&pageNumber=1 - - - 200 - application/json;+charset=utf-8 317.7597ms
+2023-08-25 18:23:18.754 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=1 - -
+2023-08-25 18:23:18.755 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:18.755 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:23:18.790 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:23:18.791 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:23:18.792 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 37.063ms
+2023-08-25 18:23:18.792 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:18.792 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 37.8045ms
+2023-08-25 18:23:22.960 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=4 - -
+2023-08-25 18:23:22.960 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:22.961 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:23:23.037 +05:30 [INF] Executed DbCommand (49ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:23:23.037 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:23:23.038 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 77.3032ms
+2023-08-25 18:23:23.038 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:23.038 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=1&pageSize=1&pageNumber=4 - - - 200 - application/json;+charset=utf-8 78.3686ms
+2023-08-25 18:23:30.187 +05:30 [INF] Request starting HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=3&pageSize=1&pageNumber=1 - -
+2023-08-25 18:23:30.188 +05:30 [INF] Executing endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:30.188 +05:30 [INF] Route matched with {action = "GetCars", controller = "UserCar"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Use_Wheels.Models.DTO.APIResponse]] GetCars(System.Nullable`1[System.Int32], Int32, Int32) on controller Use_Wheels.Controllers.UserCarController (Use Wheels).
+2023-08-25 18:23:30.314 +05:30 [INF] Executed DbCommand (120ms) [Parameters=[@__categoryId_0='?' (DbType = Int32), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Vehicle_No`, `c`.`Availability`, `c`.`Category_Id`, `c`.`Created_Date`, `c`.`Description`, `c`.`Img_URL`, `c`.`Likes`, `c`.`Pre_Owner_Count`, `c`.`Price`, `c`.`Updated_Date`
+FROM `Cars` AS `c`
+WHERE `c`.`Category_Id` = @__categoryId_0
+LIMIT @__p_2 OFFSET @__p_1
+2023-08-25 18:23:30.315 +05:30 [INF] Executing OkObjectResult, writing value of type 'Use_Wheels.Models.DTO.APIResponse'.
+2023-08-25 18:23:30.316 +05:30 [INF] Executed action Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels) in 127.4566ms
+2023-08-25 18:23:30.316 +05:30 [INF] Executed endpoint 'Use_Wheels.Controllers.UserCarController.GetCars (Use Wheels)'
+2023-08-25 18:23:30.316 +05:30 [INF] Request finished HTTP/1.1 GET https://localhost:7192/user/cars?categoryId=3&pageSize=1&pageNumber=1 - - - 200 - application/json;+charset=utf-8 128.4105ms

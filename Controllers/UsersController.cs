@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Use_Wheels.Models.DTO;
 using Use_Wheels.Repository.IRepository;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
+using Use_Wheels.Repository;
 
 namespace Use_Wheels.Controllers
 {
@@ -12,7 +15,9 @@ namespace Use_Wheels.Controllers
     {
         private readonly IUserRepository _userRepo;
         protected APIResponse _response;
-        public UsersController(IUserRepository userRepo)
+        private readonly ILogger<UsersController> _logger;
+
+        public UsersController(IUserRepository userRepo, ILogger<UsersController> logger)
         {
             _userRepo = userRepo;
             _response = new();
@@ -24,6 +29,7 @@ namespace Use_Wheels.Controllers
             var loginResponse = await _userRepo.Login(model);
             if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
             {
+                _logger.LogError("Invalid credentials entered");
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 _response.ErrorMessages.Add("Username or password is incorrect");
@@ -38,12 +44,28 @@ namespace Use_Wheels.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterationRequestDTO model)
         {
-            bool ifUserNameUnique = _userRepo.IsUniqueUser(model.Username);
-            if (!ifUserNameUnique)
+            int ifUserNameUnique = _userRepo.IsUniqueUser(model.Username, model.Email);
+            if (ifUserNameUnique == -1)
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 _response.ErrorMessages.Add("Username already exists");
+                return BadRequest(_response);
+            }
+            else if (ifUserNameUnique == 0)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Email already exists");
+                return BadRequest(_response);
+            }
+
+            bool isAbove18 = _userRepo.IsAbove18(model.Dob);
+            if(!isAbove18)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Age must be above 18");
                 return BadRequest(_response);
             }
 
@@ -61,7 +83,7 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpPost("user/logout")]
-        //[Authorize] // Ensure only authenticated users can log out
+        [Authorize(Roles = "customer")] // Ensures only authenticated users can log out
         public IActionResult Logout()
         {
             //Need to write clearing wishlist here

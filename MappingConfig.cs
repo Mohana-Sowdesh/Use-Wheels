@@ -13,7 +13,9 @@ namespace Use_Wheels
 			CreateMap<CarDTO, Car>();
 			CreateMap<CategoryDTO, Category>();
 			CreateMap<CarDTO, Car>();
-		}
+            CreateMap<CarUpdateDTO, Car>();
+			CreateMap<OrderDTO, Orders>();
+        }
 	}
 }
 

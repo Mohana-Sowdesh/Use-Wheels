@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Use_Wheels.Data;
 
@@ -10,9 +11,11 @@ using Use_Wheels.Data;
 namespace Use_Wheels.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230829104449_seedData")]
+    partial class seedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,14 +203,14 @@ namespace Use_Wheels.Migrations
                             Vehicle_No = "DL 89 JU 9921",
                             Availability = "available",
                             Category_Id = 1,
-                            Created_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9970),
+                            Created_Date = new DateTime(2023, 8, 29, 16, 14, 49, 437, DateTimeKind.Local).AddTicks(2150),
                             Description = "Some description",
                             Img_URL = "D://car1.jpg",
                             Likes = 0,
                             Pre_Owner_Count = 2,
                             Price = 2500000f,
                             RC_No = "635289",
-                            Updated_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9970)
+                            Updated_Date = new DateTime(2023, 8, 29, 16, 14, 49, 437, DateTimeKind.Local).AddTicks(2150)
                         });
                 });
 
@@ -249,16 +252,15 @@ namespace Use_Wheels.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<float>("Net_Price")
                         .HasColumnType("float");
 
                     b.Property<string>("Payment_Type")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("User_ID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Vehicle_No")
                         .IsRequired()
@@ -335,7 +337,7 @@ namespace Use_Wheels.Migrations
                             Board_Type = "Own board",
                             Car_Model = "Honda CR-V",
                             Colour = "Red",
-                            Created_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9950),
+                            Created_Date = new DateTime(2023, 8, 29, 16, 14, 49, 437, DateTimeKind.Local).AddTicks(2130),
                             Date_Of_Reg = new DateOnly(2001, 3, 1),
                             FC_Validity = new DateOnly(2025, 3, 1),
                             Fuel_Type = "Diesel",
@@ -344,7 +346,7 @@ namespace Use_Wheels.Migrations
                             Owner_Address = "Vasanth Vihar",
                             Owner_Name = "Ram",
                             Reg_Valid_Upto = new DateOnly(2031, 3, 1),
-                            Updated_Date = new DateTime(2023, 8, 31, 19, 26, 25, 102, DateTimeKind.Local).AddTicks(9950),
+                            Updated_Date = new DateTime(2023, 8, 29, 16, 14, 49, 437, DateTimeKind.Local).AddTicks(2130),
                             Vehicle_No = "DL 89 JU 9921"
                         });
                 });

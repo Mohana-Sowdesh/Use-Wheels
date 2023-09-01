@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.FileIO;
@@ -11,7 +12,6 @@ namespace Use_Wheels.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
 
         public DbSet<UserDTO> Users { get; set; }
@@ -23,21 +23,6 @@ namespace Use_Wheels.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<UserDTO>().HasData(
-            //    new UserDTO
-            //    {
-            //        Id = "1",
-            //        UserName = "admin1",
-            //        PasswordHash = "Admin@1",
-            //        Role = "admin",
-            //        Email = "admin1@cars24.com",
-            //        First_Name = "Admin",
-            //        Last_Name = "Admin",
-            //        Dob = new DateOnly(1980, 3, 1),
-            //        Phone_Number = "8343949349",
-            //        Gender = "Male"
-            //    }
-            //);
 
             modelBuilder.Entity<Category>().HasData(
                 new Category
@@ -59,42 +44,6 @@ namespace Use_Wheels.Data
                 }
             );
 
-            modelBuilder.Entity<Car>().HasData(
-                new Car
-                {
-                    Vehicle_No = "DL 89 JU 9921",
-                    Category_Id = 1,
-                    Description = "Some description",
-                    Pre_Owner_Count = 2,
-                    Img_URL = "D://car1.jpg",
-                    Price = 2500000,
-                    Created_Date = DateTime.Now,
-                    Updated_Date = DateTime.Now
-                },
-                new Car
-                {
-                    Vehicle_No = "HR 82 KU 3214",
-                    Category_Id = 2,
-                    Description = "Some description",
-                    Pre_Owner_Count = 1,
-                    Img_URL = "D://car2.jpg",
-                    Price = 3500000,
-                    Created_Date = DateTime.Now,
-                    Updated_Date = DateTime.Now
-                },
-                new Car
-                {
-                    Vehicle_No = "KL 14 FV 8845",
-                    Category_Id = 3,
-                    Description = "Some description",
-                    Pre_Owner_Count = 1,
-                    Img_URL = "D://car3.jpg",
-                    Price = 1500000,
-                    Created_Date = DateTime.Now,
-                    Updated_Date = DateTime.Now
-                }
-            );
-
             modelBuilder.Entity<RC>().HasData(
                 new RC
                 {
@@ -113,42 +62,21 @@ namespace Use_Wheels.Data
                     Colour = "Red",
                     Created_Date = DateTime.Now,
                     Updated_Date = DateTime.Now
-                },
-                new RC
+                }
+            );
+
+            modelBuilder.Entity<Car>().HasData(
+                new Car
                 {
-                    RC_No = "788734",
-                    Vehicle_No = "HR 82 KU 3214",
-                    Date_Of_Reg = new DateOnly(2003, 9, 1),
-                    Reg_Valid_Upto = new DateOnly(2033, 9, 1),
-                    Owner_Name = "Shyam",
-                    Owner_Address = "Gurgaon",
-                    Board_Type = "T board",
-                    FC_Validity = new DateOnly(2027, 6, 1),
-                    Insurance_Type = "Zero Depreciation",
-                    Car_Model = "Volkswagen Golf",
-                    Manufactured_Year = 2011,
-                    Fuel_Type = "Petrol",
-                    Colour = "Atlantic Blue Metallic",
+                    Vehicle_No = "DL 89 JU 9921",
+                    Category_Id = 1,
+                    Description = "Some description",
+                    Pre_Owner_Count = 2,
+                    Img_URL = "D://car1.jpg",
+                    Price = 2500000,
                     Created_Date = DateTime.Now,
-                    Updated_Date = DateTime.Now
-                },
-                new RC
-                {
-                    RC_No = "676725",
-                    Vehicle_No = "KL 14 FV 8845",
-                    Date_Of_Reg = new DateOnly(2012, 7, 1),
-                    Reg_Valid_Upto = new DateOnly(2033, 7, 1),
-                    Owner_Name = "Kaleel",
-                    Owner_Address = "Pathanamthitta",
-                    Board_Type = "Own board",
-                    FC_Validity = new DateOnly(2030, 3, 1),
-                    Insurance_Type = "Comprehensive",
-                    Car_Model = "Honda Accord",
-                    Manufactured_Year = 2008,
-                    Fuel_Type = "Petrol",
-                    Colour = "Crystal Black Pearl",
-                    Created_Date = DateTime.Now,
-                    Updated_Date = DateTime.Now
+                    Updated_Date = DateTime.Now,
+                    RC_No = "635289"
                 }
             );
         }

@@ -21,6 +21,7 @@ namespace Use_Wheels.Controllers
         {
             _userRepo = userRepo;
             _response = new();
+            _logger = logger;
         }
 
         [HttpPost("login")]
@@ -86,11 +87,23 @@ namespace Use_Wheels.Controllers
         [Authorize(Roles = "customer")] // Ensures only authenticated users can log out
         public IActionResult Logout()
         {
-            //Need to write clearing wishlist here
-            _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
-            _response.Result = "Logout successful";
-            return Ok(_response);
+            string username = HttpContext.User.Identity.Name;
+            bool userDeletionResult =  WishListRepository.DeleteUser(username);
+
+            if (userDeletionResult)
+            {
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess = true;
+                _response.Result = "Logout successful";
+                return Ok(_response);
+            }
+            else
+            {
+                _response.StatusCode = HttpStatusCode.FailedDependency;
+                _response.IsSuccess = false;
+                _response.Result = "Logout unsuccessful";
+                return BadRequest(_response);
+            }
         }
     }
 }

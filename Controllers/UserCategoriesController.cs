@@ -12,6 +12,7 @@ namespace Use_Wheels.Controllers
 {
     [Route("user/categories")]
     [ApiController]
+    [Authorize(Roles = "customer")]
     public class UserCategoriesController : ControllerBase
 	{
         protected APIResponse _response;
@@ -26,8 +27,8 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "customer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<APIResponse>> GetCategories()
         {
             IEnumerable<Category> categoryList = await _db.Categories.ToListAsync();

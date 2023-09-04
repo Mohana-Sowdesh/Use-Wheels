@@ -31,8 +31,7 @@ namespace Use_Wheels.Controllers
 
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
-        //[ResponseCache(CacheProfileName = "Default30
+        [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllCars()
         {
@@ -44,7 +43,6 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpGet("{vehicle_no}", Name = "GetCar")]
-        //[Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -79,7 +77,6 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<APIResponse>> AddCar([FromBody] CarDTO carDTO)
@@ -113,7 +110,6 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpDelete("{vehicle_no}", Name = "DeleteCar")]
-        //[Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -149,7 +145,6 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpPut("{vehicle_no}", Name = "UpdateCar")]
-        //[Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateCar(string vehicle_no, [FromBody] CarUpdateDTO carUpdateDTO)

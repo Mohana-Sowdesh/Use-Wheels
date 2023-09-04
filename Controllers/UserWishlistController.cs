@@ -9,6 +9,7 @@ using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using Serilog;
 using static Azure.Core.HttpHeader;
+using Use_Wheels.Repository;
 
 namespace Use_Wheels.Controllers
 {
@@ -19,10 +20,6 @@ namespace Use_Wheels.Controllers
     {
         protected APIResponse _response;
         private ICarRepository _dbCar;
-        static Wishlist newWishlist = new Wishlist
-        {
-            wishlist = new List<Car>()
-        };
 
         public UserWishlistController(ICarRepository dbCar)
         {
@@ -34,10 +31,24 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetWishlist()
         {
-            Log.Information("List contents: {@Names}", newWishlist.wishlist);
-            _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
-            _response.Result = newWishlist.wishlist.ToList();
+            string username = HttpContext.User.Identity.Name;
+            List<Car> userWishlist = WishListRepository.GetUserWishlist(username);
+            Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
+            Log.Information("List contents: {@Names}", WishListRepository.wishlist);
+
+            if (userWishlist == null)
+            {
+                Log.Error("No cars present in wishlist");
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess = true;
+                _response.Result = "No cars present in wishlist";
+            }
+            else
+            {
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess = true;
+                _response.Result = userWishlist;
+            }
             return Ok(_response);
         }
 
@@ -52,22 +63,31 @@ namespace Use_Wheels.Controllers
                 {
                     return BadRequest();
                 }
-                var car = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no);
-                if (car == null)
+                var car = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no, includeProperties: "Rc_Details");
+                if (car == null || car.Availability == "sold")
                 {
                     return NotFound();
                 }
+                string username = HttpContext.User.Identity.Name;
+                bool isUserInWishlist = WishListRepository.IsUserExists(username);
+                List<Car> userCars;
 
-                bool exists = newWishlist.wishlist.Any(x => x.Vehicle_No == car.Vehicle_No);
+                if (!isUserInWishlist)
+                    WishListRepository.CreateNewList(username);
+
+                bool exists = WishListRepository.GetUserWishlist(username).Any(x => x.Vehicle_No == car.Vehicle_No);
+
                 if (exists)
+                {
+                    Log.Information("Condition result: {@Result}", exists);
                     return BadRequest("Car already present in wishlist");
+                }
+                else
+                    WishListRepository.AddToList(username, car);
 
-
-                Log.Information("Condition result: {@Result}", exists);
                 car.Likes = car.Likes + 1;
-                newWishlist.wishlist.Add(car);
                 await _dbCar.UpdateAsync(car);
-                Log.Information("List contents: {@Names}", newWishlist.wishlist);
+                Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
                 _response.Result = "Car added to wish-list successfully!!";
                 _response.StatusCode = HttpStatusCode.Created;
                 return Ok(_response);
@@ -93,17 +113,18 @@ namespace Use_Wheels.Controllers
             {
                 return BadRequest("Vehicle no. is mandatory");
             }
-            var vehicle = newWishlist.wishlist.FirstOrDefault(u => u.Vehicle_No == vehicle_no);
-                
-            if (vehicle == null)
-            {
-                return NotFound();
-            }
 
-            bool deleteResult = newWishlist.wishlist.Remove(vehicle);
+            string username = HttpContext.User.Identity.Name;
+            
+            int deleteResult = WishListRepository.DeleteFromList(username, vehicle_no);
+
+            if (deleteResult == -1)
+                return NotFound();
+            
             Log.Information("Condition result: {@Result}", deleteResult);
             _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
+            _response.Result = "Car deleted successfully from wishlist!!";
             return Ok(_response);
         }
 

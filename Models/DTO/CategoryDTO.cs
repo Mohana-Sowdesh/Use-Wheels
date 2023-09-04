@@ -3,7 +3,7 @@ namespace Use_Wheels.Models.DTO
 {
 	public class CategoryDTO
 	{
-		public string Category_Names { get; set; }
+		public required string Category_Names { get; set; }
 	}
 }
 

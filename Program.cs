@@ -21,12 +21,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers(option => {
-    //option.CacheProfiles.Add("Default30",
-    //   new CacheProfile()
-    //   {
-    //       Duration = 30
-    //   });
-    //option.ReturnHttpNotAcceptable=true;
+    option.CacheProfiles.Add("Default30",
+       new CacheProfile()
+       {
+           Duration = 30
+       });
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 builder.Services.AddResponseCaching();
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
@@ -62,8 +61,6 @@ builder.Services.AddAuthentication(x =>
 );
 
 builder.Services.AddAuthorization();
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddIdentity<UserDTO, IdentityRole>(options =>
 //{
 //    // Configure username validations
@@ -72,6 +69,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 //})
 //.AddEntityFrameworkStores<ApplicationDbContext>()
 //.AddDefaultTokenProviders();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();

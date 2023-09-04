@@ -15,6 +15,7 @@ namespace Use_Wheels.Controllers
 {
     [Route("user/cars")]
     [ApiController]
+    [Authorize(Roles = "customer")]
     public class UserCarController : ControllerBase
     {
         protected APIResponse _response;
@@ -29,8 +30,7 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "customer")]
-        //[ResponseCache(CacheProfileName = "Default30")]
+        [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -71,7 +71,7 @@ namespace Use_Wheels.Controllers
         }
 
         [HttpGet("{vehicle_no}", Name = "GetUserCar")]
-        [Authorize(Roles = "customer")]
+        [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]

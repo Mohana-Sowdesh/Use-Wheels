@@ -13,11 +13,11 @@ namespace Use_Wheels.Models.DTO
         public string? Role { get; set; }
 
         [Required]
-        [RegularExpression("a-zA-Z")]
+        [RegularExpression("[a-zA-Z]+")]
         public string First_Name { get; set; }
 
         [Required]
-        [RegularExpression("a-zA-Z")]
+        [RegularExpression("[a-zA-Z]+")]
         public string Last_Name { get; set; }
 
         [Required]

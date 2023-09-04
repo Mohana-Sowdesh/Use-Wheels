@@ -111,7 +111,7 @@ namespace Use_Wheels.Repository
             };
 
             try
-            {
+            { 
                 var result = await _userManager.CreateAsync(user, registerationRequestDTO.Password);
                 if (result.Succeeded)
                 {
@@ -124,7 +124,10 @@ namespace Use_Wheels.Repository
                     var userToReturn = _db.Users
                         .FirstOrDefault(u => u.UserName == registerationRequestDTO.Username);
                     return _mapper.Map<UserDTO>(userToReturn);
-
+                }
+                else
+                {
+                    Console.WriteLine(result.Errors.ToList());
                 }
             }
             catch(Exception e)

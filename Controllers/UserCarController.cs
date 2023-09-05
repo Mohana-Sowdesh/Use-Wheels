@@ -29,6 +29,13 @@ namespace Use_Wheels.Controllers
             _response = new();
         }
 
+        /// <summary>
+        /// Method to get cars for customer role
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns>APIResponse object with the requested list of <see cref="Car"/>cars</returns>
         [HttpGet]
         [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -70,6 +77,11 @@ namespace Use_Wheels.Controllers
 
         }
 
+        /// <summary>
+        /// Method to get car by id for customer role
+        /// </summary>
+        /// <param name="vehicle_no"></param>
+        /// <returns>APIResponse object consisting the <see cref="Car"/> Car with RC details object on success</returns>
         [HttpGet("{vehicle_no}", Name = "GetUserCar")]
         [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]

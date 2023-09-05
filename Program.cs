@@ -15,6 +15,8 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
+using Use_Wheels.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +47,6 @@ builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    //x.AddScheme<JwtBearerHandler>(JwtBearerDefaults.AuthenticationScheme, null);
 }).AddJwtBearer(x =>
 {
     x.RequireHttpsMetadata = false;
@@ -60,15 +61,13 @@ builder.Services.AddAuthentication(x =>
 }
 );
 
+var redis = ConnectionMultiplexer.Connect("localhost:6379");
+builder.Services.AddScoped(s => redis.GetDatabase());
+//builder.Services.AddScoped(AuthMiddleware);
+
 builder.Services.AddAuthorization();
-//builder.Services.AddIdentity<UserDTO, IdentityRole>(options =>
-//{
-//    // Configure username validations
-//    options.User.RequireUniqueEmail = true; 
-//    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"; // Allowed characters
-//})
-//.AddEntityFrameworkStores<ApplicationDbContext>()
-//.AddDefaultTokenProviders();
+
+//Registers IUserRepository service along with its implementation UserRepository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
@@ -128,7 +127,7 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<TokenValidator>();
 app.MapControllers();
 app.UseResponseCaching();
 app.Run();

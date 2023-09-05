@@ -29,6 +29,10 @@ namespace Use_Wheels.Controllers
             _response = new();
         }
 
+        /// <summary>
+        /// Method to get all categories for admin role
+        /// </summary>
+        /// <returns>APIResponse with list of <see cref="Category"/>categories</returns>
         [HttpGet(Name = "GetCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ResponseCache(CacheProfileName = "Default30")]
@@ -41,6 +45,12 @@ namespace Use_Wheels.Controllers
             return Ok(_response);
         }
 
+
+        /// <summary>
+        /// Method to create a category for admin role
+        /// </summary>
+        /// <param name="categoryDTO">CategoryDTO object</param>
+        /// <returns>APIResponse with created <see cref="Category"/>category as result on success</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -74,6 +84,11 @@ namespace Use_Wheels.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Method to delete a category for admin role by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}", Name = "DeleteCategory")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]

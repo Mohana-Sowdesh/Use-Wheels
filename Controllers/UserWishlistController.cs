@@ -34,7 +34,7 @@ namespace Use_Wheels.Controllers
             string username = HttpContext.User.Identity.Name;
             List<Car> userWishlist = WishListRepository.GetUserWishlist(username);
             Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
-            Log.Information("List contents: {@Names}", WishListRepository.wishlist);
+            //Log.Information("List contents: {@Names}", WishListRepository.wishlist);
 
             if (userWishlist == null)
             {

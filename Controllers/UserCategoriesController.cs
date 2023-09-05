@@ -26,6 +26,10 @@ namespace Use_Wheels.Controllers
             _response = new();
         }
 
+        /// <summary>
+        /// Method to get categories for customer role
+        /// </summary>
+        /// <returns>APIResponse object consisting the <see cref="Car"/> Car with RC details object on success</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ResponseCache(CacheProfileName = "Default30")]

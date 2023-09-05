@@ -6,6 +6,7 @@ using Use_Wheels.Repository.IRepository;
 using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using Use_Wheels.Repository;
+using StackExchange.Redis;
 
 namespace Use_Wheels.Controllers
 {
@@ -16,9 +17,11 @@ namespace Use_Wheels.Controllers
         private readonly IUserRepository _userRepo;
         protected APIResponse _response;
         private readonly ILogger<UsersController> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsersController(IUserRepository userRepo, ILogger<UsersController> logger)
+        public UsersController(IUserRepository userRepo, ILogger<UsersController> logger, IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _userRepo = userRepo;
             _response = new();
             _logger = logger;
@@ -85,10 +88,15 @@ namespace Use_Wheels.Controllers
 
         [HttpPost("user/logout")]
         [Authorize(Roles = "customer")] // Ensures only authenticated users can log out
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
             string username = HttpContext.User.Identity.Name;
             bool userDeletionResult =  WishListRepository.DeleteUser(username);
+
+            var jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
+            var redis = ConnectionMultiplexer.Connect("localhost:6379");
+            IDatabase db = redis.GetDatabase();
+            await db.StringSetAndGetAsync(jwtToken, new RedisValue("1"));
 
             if (userDeletionResult)
             {

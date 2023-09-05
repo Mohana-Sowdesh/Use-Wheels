@@ -29,7 +29,11 @@ namespace Use_Wheels.Controllers
             _response = new();
         }
 
-
+        /// <summary>
+        /// Method to gets all cars for admin role
+        /// </summary>
+        /// <param></param>
+        /// <returns>APIResponse object consisting list of <see cref="Car"/>Car with RC details</returns>
         [HttpGet]
         [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -42,6 +46,12 @@ namespace Use_Wheels.Controllers
             return Ok(_response);
         }
 
+
+        /// <summary>
+        /// Method to gets particular car by ID for admin role
+        /// </summary>
+        /// <param name="vehicle_no"></param>
+        /// <returns>APIResponse object consisting the <see cref="Car"/> Car with RC details object on success</returns>
         [HttpGet("{vehicle_no}", Name = "GetCar")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -76,6 +86,12 @@ namespace Use_Wheels.Controllers
             return _response;
         }
 
+
+        /// <summary>
+        /// Method to gets particular car by ID for admin role
+        /// </summary>
+        /// <param name="carDTO">CarDTO Object</param>
+        /// <returns>APIResponse object consisting the car object on success</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -109,6 +125,11 @@ namespace Use_Wheels.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Method to delete a particular car by vehicle_no for admin role
+        /// </summary>
+        /// <param name="vehicle_no"></param>
+        /// <returns></returns>
         [HttpDelete("{vehicle_no}", Name = "DeleteCar")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -144,6 +165,12 @@ namespace Use_Wheels.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Method to update a particular car by vehicle_no for admin role
+        /// </summary>
+        /// <param name="vehicle_no"></param>
+        /// <param name="carUpdateDTO">CarUpdateDTO object</param>
+        /// <returns>APIResponse with no content on success or error list on exception</returns>
         [HttpPut("{vehicle_no}", Name = "UpdateCar")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

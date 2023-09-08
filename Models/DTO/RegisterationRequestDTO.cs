@@ -20,7 +20,7 @@ namespace Use_Wheels.Models.DTO
         [RegularExpression("[a-zA-Z]+", ErrorMessage = "Last name must contain only alphabets")]
         public required string Last_Name { get; set; }
 
-        [RegularExpression("^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\\d{4}$", ErrorMessage = "Please enter a valid date")]
+        //[RegularExpression("^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\\d{4}$", ErrorMessage = "Please enter a valid date")]
         public required DateOnly Dob { get; set; }
 
         [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid phone number")]

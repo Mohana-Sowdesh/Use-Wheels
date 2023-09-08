@@ -23,6 +23,11 @@ namespace Use_Wheels.Auth
 
         public async Task Invoke(HttpContext httpContext)
         {
+            if (httpContext.Request.Headers.Authorization.Count == 0)
+            {
+                await _next(httpContext);
+                return;
+            }
             try
             {
                 var path = httpContext.Request.Path;
@@ -32,11 +37,6 @@ namespace Use_Wheels.Auth
                 string metaDataAddress = issuer + "/.well-known/oauth-authorization-server";
                 CustomAuthHandler authHandler = new CustomAuthHandler();
 
-                if (httpContext.Request.Headers.Authorization.Count == 0)
-                {
-                    await _next(httpContext);
-                    return;
-                }
 
                 var header = httpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ");
                 
@@ -55,7 +55,6 @@ namespace Use_Wheels.Auth
                 {
                     throw new Exception("404 - Authorization failed");
                 }
-                await _next(httpContext);
 
             }
             catch (Exception)
@@ -63,6 +62,7 @@ namespace Use_Wheels.Auth
                 httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 HttpResponseWritingExtensions.WriteAsync(httpContext.Response, "{\"message\": \"Unauthorized\"}").Wait();
             }
+            await _next(httpContext);
         }
     }
 

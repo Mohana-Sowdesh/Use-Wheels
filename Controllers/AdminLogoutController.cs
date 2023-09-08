@@ -27,17 +27,26 @@ namespace Use_Wheels.Controllers
         /// </summary>
         /// <returns>APIResponse object with success message as result</returns>
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
+        public async Task<ActionResult<APIResponse>> Logout()
         {
-            var jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
-            var redis = ConnectionMultiplexer.Connect("localhost:6379");
-            IDatabase db = redis.GetDatabase();
-            await db.StringSetAndGetAsync(jwtToken, new RedisValue("1"));
+            try
+            {
+                var jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
+                var redis = ConnectionMultiplexer.Connect("localhost:6379");
+                IDatabase db = redis.GetDatabase();
+                await db.StringSetAndGetAsync(jwtToken, new RedisValue("1"), new TimeSpan(24, 0, 0));
 
-            _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
-            _response.Result = "Logout successful";
-            return Ok(_response);
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess = true;
+                _response.Result = "Logout successful";
+                return Ok(_response);
+            }
+            catch (Exception e)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { e.ToString() };
+            }
+            return _response;
         }
     }
 }

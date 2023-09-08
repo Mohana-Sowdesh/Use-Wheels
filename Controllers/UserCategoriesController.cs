@@ -7,6 +7,8 @@ using Use_Wheels.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Microsoft.AspNetCore.Authorization;
+using Use_Wheels.Repository.IRepository;
+using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -16,12 +18,12 @@ namespace Use_Wheels.Controllers
     public class UserCategoriesController : ControllerBase
 	{
         protected APIResponse _response;
-        private ApplicationDbContext _db;
         private readonly IMapper _mapper;
+        private IUserCategoriesServices _service;
 
-        public UserCategoriesController(ApplicationDbContext db, IMapper mapper)
+        public UserCategoriesController(IUserCategoriesServices service, IMapper mapper)
         {
-            _db = db;
+            _service = service;
             _mapper = mapper;
             _response = new();
         }
@@ -35,7 +37,8 @@ namespace Use_Wheels.Controllers
         [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<APIResponse>> GetCategories()
         {
-            IEnumerable<Category> categoryList = await _db.Categories.ToListAsync();
+            IEnumerable<Category> categoryList = await _service.GetCategories();
+
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             _response.Result = categoryList;

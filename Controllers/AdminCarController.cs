@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Net;
+using System.Runtime.ConstrainedExecution;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Use_Wheels.Data;
 using Use_Wheels.Models.DTO;
 using Use_Wheels.Repository.IRepository;
+using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -17,14 +19,16 @@ namespace Use_Wheels.Controllers
     public class AdminCarController : ControllerBase
 	{
         protected APIResponse _response;
-        private ICarRepository _dbCar;
         private readonly IMapper _mapper;
+        private readonly IAdminCarServices _service;
         private readonly ApplicationDbContext _db;
+        private ICarRepository _dbCar;
 
-        public AdminCarController(ApplicationDbContext db, ICarRepository dbCar, IMapper mapper)
+        public AdminCarController(IMapper mapper, IAdminCarServices service, ApplicationDbContext db, ICarRepository dbCar)
         {
             _db = db;
             _dbCar = dbCar;
+            _service = service;
             _mapper = mapper;
             _response = new();
         }
@@ -39,7 +43,8 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllCars()
         {
-            IEnumerable<Car> carList = await _dbCar.GetAllAsync(includeProperties: "Rc_Details");
+            IEnumerable<Car> carList = await _service.GetAllCars();
+
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             _response.Result = carList;
@@ -61,29 +66,11 @@ namespace Use_Wheels.Controllers
         [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<APIResponse>> GetCarById(string vehicle_no)
         {
-            try
-            {
-                if (vehicle_no == null)
-                {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    return BadRequest(_response);
-                }
-                var category = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no, includeProperties: "Rc_Details");
-                if (category == null)
-                {
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    return NotFound(_response);
-                }
-                _response.Result = category;
-                _response.StatusCode = HttpStatusCode.OK;
-                return Ok(_response);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
-            }
-            return _response;
+            var car = await _service.GetCarById(vehicle_no);
+                
+            _response.Result = car;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
         }
 
 
@@ -98,21 +85,9 @@ namespace Use_Wheels.Controllers
         public async Task<ActionResult<APIResponse>> AddCar([FromBody] CarDTO carDTO)
         {
             try
-            {
-                if (await _dbCar.GetAsync(u => u.Vehicle_No.ToLower() == carDTO.Vehicle_No.ToLower()) != null)
-                {
-                    ModelState.AddModelError("ErrorMessages", "Car already Exists!");
-                    return BadRequest(ModelState);
-                }
-
-                if (carDTO == null)
-                {
-                    return BadRequest(carDTO);
-                }
-
-                Car car = _mapper.Map<Car>(carDTO);
-                await _dbCar.CreateAsync(car);
-
+            { 
+                Car car = await _service.AddCar(carDTO);
+                
                 _response.Result = car;
                 _response.StatusCode = HttpStatusCode.Created;
                 return CreatedAtRoute("GetCar", new { vehicle_no = car.Vehicle_No }, _response);
@@ -139,20 +114,9 @@ namespace Use_Wheels.Controllers
         public async Task<ActionResult<APIResponse>> DeleteCar(string vehicle_no)
         {
             try
-            {
-                if (vehicle_no == null)
-                {
-                    return BadRequest("Vehicle no. is mandatory");
-                }
-                var vehicle = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no);
-                var rc = await _db.RC.FirstOrDefaultAsync(u => u.Vehicle_No == vehicle_no);
-                if (vehicle == null)
-                {
-                    return NotFound();
-                }
-                await _dbCar.RemoveAsync(vehicle);
-                _db.RC.Remove(rc);
-                await _db.SaveChangesAsync();
+            { 
+                await _service.DeleteCar(vehicle_no);
+
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
@@ -177,20 +141,9 @@ namespace Use_Wheels.Controllers
         public async Task<ActionResult<APIResponse>> UpdateCar(string vehicle_no, [FromBody] CarUpdateDTO carUpdateDTO)
         {
             try
-            {
-                if (carUpdateDTO == null || vehicle_no != carUpdateDTO.Vehicle_No)
-                {
-                    return BadRequest("Vehicle no. doesn't match");
-                }
-                Car dbCar = await _dbCar.GetAsync(u => u.Vehicle_No == carUpdateDTO.Vehicle_No);
-                if(dbCar == null)
-                {
-                    return BadRequest("Car doesn't exist");
-                }
-                Car model = _mapper.Map<Car>(carUpdateDTO);
+            {   
+                await _service.UpdateCar(vehicle_no, carUpdateDTO);
 
-                model.Created_Date = dbCar.Created_Date;
-                await _dbCar.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
@@ -198,8 +151,7 @@ namespace Use_Wheels.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
             return _response;
         }

@@ -31,6 +31,10 @@
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.10" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.32.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.32.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +45,10 @@
     <None Remove="Repository\IRepository\" />
     <None Remove="Controllers\" />
     <None Remove="Logs\" />
+    <None Remove="Auth\" />
+    <None Remove="Services\" />
+    <None Remove="Services\IServices\" />
+    <None Remove="Utility\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -50,5 +58,9 @@
     <Folder Include="Repository\IRepository\" />
     <Folder Include="Controllers\" />
     <Folder Include="Logs\" />
+    <Folder Include="Auth\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\IServices\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
 </Project>

@@ -27,6 +27,11 @@ namespace Use_Wheels.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Method to log a user in
+        /// </summary>
+        /// <param name="LoginRequestDTO"></param>
+        /// <returns>APIResponse object with success code on success or error messages on error</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
         {
@@ -45,6 +50,11 @@ namespace Use_Wheels.Controllers
             return Ok(_response);
         }
 
+        /// <summary>
+        /// Method to register a customer
+        /// </summary>
+        /// <param name="RegisterationRequestDTO"></param>
+        /// <returns>APIResponse object with success code on success or error messages on error</returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterationRequestDTO model)
         {
@@ -86,32 +96,40 @@ namespace Use_Wheels.Controllers
             return Ok(_response);
         }
 
+        /// <summary>
+        /// Method to log a user out
+        /// </summary>
+        /// <returns>APIResponse object with success code on success or error message(s) on error</returns>
         [HttpPost("user/logout")]
         [Authorize(Roles = "customer")] // Ensures only authenticated users can log out
-        public async Task<IActionResult> Logout()
+        public async Task<ActionResult<APIResponse>> Logout()
         {
             string username = HttpContext.User.Identity.Name;
-            bool userDeletionResult =  WishListRepository.DeleteUser(username);
+            bool isUserExists =  WishListRepository.IsUserExists(username);
 
-            var jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
-            var redis = ConnectionMultiplexer.Connect("localhost:6379");
-            IDatabase db = redis.GetDatabase();
-            await db.StringSetAndGetAsync(jwtToken, new RedisValue("1"));
-
-            if (userDeletionResult)
+            if (isUserExists)
             {
+                WishListRepository.DeleteUser(username);
+            }
+
+            try
+            {
+                var jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
+                var redis = ConnectionMultiplexer.Connect("localhost:6379");
+                IDatabase db = redis.GetDatabase();
+                await db.StringSetAndGetAsync(jwtToken, new RedisValue("1"), new TimeSpan(24, 0, 0));
+
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
                 _response.Result = "Logout successful";
                 return Ok(_response);
             }
-            else
+            catch(Exception e)
             {
-                _response.StatusCode = HttpStatusCode.FailedDependency;
                 _response.IsSuccess = false;
-                _response.Result = "Logout unsuccessful";
-                return BadRequest(_response);
+                _response.ErrorMessages = new List<string>() { e.ToString() };
             }
+            return _response;
         }
     }
 }

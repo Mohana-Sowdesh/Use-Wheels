@@ -1,0 +1,20 @@
+2023-09-08 12:23:44.863 +05:30 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-09-08 12:23:45.232 +05:30 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7192
+2023-09-08 12:23:45.232 +05:30 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5271
+2023-09-08 12:23:45.232 +05:30 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2023-09-08 12:23:45.232 +05:30 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2023-09-08 12:23:45.233 +05:30 [INF] Microsoft.Hosting.Lifetime Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-09-08 12:23:46.378 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-09-08 12:23:46.428 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 50.6917ms
+2023-09-08 12:23:46.482 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-09-08 12:23:46.540 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 58.1265ms
+2023-09-08 12:34:15.193 +05:30 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using '/Users/mohanasowdesh/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2023-09-08 12:34:15.393 +05:30 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7192
+2023-09-08 12:34:15.393 +05:30 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5271
+2023-09-08 12:34:15.394 +05:30 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2023-09-08 12:34:15.394 +05:30 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2023-09-08 12:34:15.394 +05:30 [INF] Microsoft.Hosting.Lifetime Content root path: /Users/mohanasowdesh/Projects/Use Wheels
+2023-09-08 12:34:16.641 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/1.1 GET https://localhost:7192/swagger/index.html - -
+2023-09-08 12:34:16.690 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/1.1 GET https://localhost:7192/swagger/index.html - - - 200 - text/html;charset=utf-8 48.9263ms
+2023-09-08 12:34:16.743 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - -
+2023-09-08 12:34:16.800 +05:30 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/1.1 GET https://localhost:7192/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 57.2882ms

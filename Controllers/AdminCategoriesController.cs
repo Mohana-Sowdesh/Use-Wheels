@@ -10,6 +10,7 @@ using Use_Wheels.Data;
 using Use_Wheels.Models.DTO;
 using Use_Wheels.Repository;
 using Use_Wheels.Repository.IRepository;
+using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -21,9 +22,11 @@ namespace Use_Wheels.Controllers
         protected APIResponse _response;
         private ICategoryRepository _dbCategory;
         private readonly IMapper _mapper;
+        private readonly IAdminCategoriesServices _service;
 
-        public AdminCategoriesController(ICategoryRepository dbCategory, IMapper mapper)
+        public AdminCategoriesController(ICategoryRepository dbCategory, IMapper mapper, IAdminCategoriesServices service)
 		{
+            _service = service;
             _dbCategory = dbCategory;
             _mapper = mapper;
             _response = new();
@@ -38,7 +41,7 @@ namespace Use_Wheels.Controllers
         [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<APIResponse>> GetAllCategories()
         {
-            IEnumerable<Category> categoryList = await _dbCategory.GetAllAsync();
+            IEnumerable<Category> categoryList = await _service.GetAllCategories();
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             _response.Result = categoryList;
@@ -71,7 +74,7 @@ namespace Use_Wheels.Controllers
 
                 Category category = _mapper.Map<Category>(categoryDTO);
 
-                await _dbCategory.CreateAsync(category);
+                await _service.CreateCategory(category);
                 _response.Result = category;
                 _response.StatusCode = HttpStatusCode.Created;
                 return CreatedAtRoute("GetCategory", new { id = category.Category_Id }, _response);
@@ -108,7 +111,9 @@ namespace Use_Wheels.Controllers
                 {
                     return NotFound();
                 }
-                await _dbCategory.RemoveAsync(category);
+
+                await _service.DeleteCategory(category);
+
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);

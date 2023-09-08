@@ -15,7 +15,7 @@ namespace Use_Wheels.Models.DTO
         public string Vehicle_No { get; set; }
 
         [Required]
-        [RegularExpression("^\\d$", ErrorMessage = "Please enter a valid price")]
+        [RegularExpression("^\\d{5,}$", ErrorMessage = "Please enter a valid price")]
         public float Net_Price { get; set; }
 
         [Required]

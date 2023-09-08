@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using Use_Wheels.Repository;
+using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -20,22 +21,27 @@ namespace Use_Wheels.Controllers
     public class UserOrderController :ControllerBase
 	{
         protected APIResponse _response;
-        private IOrderRepository _dbOrder;
         private ICarRepository _dbCar;
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _db;
         private readonly ILogger<UserOrderController> _logger;
+        private readonly IUserOrderServices _service;
 
-        public UserOrderController(ApplicationDbContext db, IOrderRepository dbOrder, IMapper mapper, ICarRepository dbCar, ILogger<UserOrderController> logger)
+        public UserOrderController(ApplicationDbContext db, IOrderRepository dbOrder, IMapper mapper, ICarRepository dbCar, ILogger<UserOrderController> logger, IUserOrderServices service)
         {
             _db = db;
             _dbCar = dbCar;
-            _dbOrder = dbOrder;
             _mapper = mapper;
+            _service = service;
             _logger = logger;
             _response = new();
         }
 
+        /// <summary>
+        /// Method to create an order for customer role
+        /// </summary>
+        /// <param name="orderDTO"></param>
+        /// <returns>APIResponse object consisting the <see cref="OrderDTO"/> order object</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -59,9 +65,7 @@ namespace Use_Wheels.Controllers
                 return BadRequest("Car doesn't exist");
             }
 
-            car.Availability = "sold";
-            await _dbOrder.CreateAsync(order);
-            await _dbCar.UpdateAsync(car);
+            await _service.CreateOrder(car, order);
 
             _response.Result = order;
             _response.StatusCode = HttpStatusCode.Created;

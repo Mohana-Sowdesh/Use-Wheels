@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Use_Wheels.Data;
 using System.Data;
 using Microsoft.AspNetCore.Authorization;
+using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -21,9 +22,11 @@ namespace Use_Wheels.Controllers
         protected APIResponse _response;
         private ICarRepository _dbCar;
         private readonly IMapper _mapper;
+        private readonly IUserCarServices _service;
 
-        public UserCarController( ICarRepository dbCar, IMapper mapper)
+        public UserCarController( ICarRepository dbCar, IMapper mapper, IUserCarServices service)
         {
+            _service = service;
             _dbCar = dbCar;
             _mapper = mapper;
             _response = new();
@@ -46,18 +49,7 @@ namespace Use_Wheels.Controllers
         {
             try
             {
-
-                IEnumerable<Car> carList;
-                
-                if (categoryId == null)
-                {
-                    carList = await _dbCar.GetAllAsync(u => u.Availability == "available", pageSize: pageSize,
-                        pageNumber: pageNumber, includeProperties: "Rc_Details");
-                }
-                else
-                {
-                    carList = await _dbCar.GetAllAsync(u => u.Category_Id == categoryId && u.Availability == "available", pageSize: pageSize, pageNumber: pageNumber, includeProperties: "Rc_Details");
-                }
+                IEnumerable<Car> carList = await _service.GetCars(categoryId, pageSize, pageNumber);
 
                 Pagination pagination = new() { PageNumber = pageNumber, PageSize = pageSize };
 
@@ -98,13 +90,13 @@ namespace Use_Wheels.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                var category = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no && u.Availability == "available", includeProperties: "Rc_Details");
-                if (category == null)
+                Car car = await _service.GetCarById(vehicle_no);
+                if (car == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
-                _response.Result = category;
+                _response.Result = car;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Serilog;
 using static Azure.Core.HttpHeader;
 using Use_Wheels.Repository;
+using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -20,21 +21,26 @@ namespace Use_Wheels.Controllers
     {
         protected APIResponse _response;
         private ICarRepository _dbCar;
+        private readonly IUserWishlistServices _service;
 
-        public UserWishlistController(ICarRepository dbCar)
+        public UserWishlistController(ICarRepository dbCar, IUserWishlistServices service)
         {
+            _service = service;
             _dbCar = dbCar;
             _response = new();
         }
 
+        /// <summary>
+        /// Controller method to get a wishlist of a user
+        /// </summary>
+        /// <returns>APIResponse object with wishlist of that particular user as result</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetWishlist()
         {
             string username = HttpContext.User.Identity.Name;
-            List<Car> userWishlist = WishListRepository.GetUserWishlist(username);
+            IEnumerable<Car> userWishlist = _service.GetWishlist(username);
             Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
-            //Log.Information("List contents: {@Names}", WishListRepository.wishlist);
 
             if (userWishlist == null)
             {
@@ -52,6 +58,11 @@ namespace Use_Wheels.Controllers
             return Ok(_response);
         }
 
+        /// <summary>
+        /// Controller method to add a car to wishlist of that user
+        /// </summary>
+        /// <param name="vehicle_no"></param>
+        /// <returns>APIResponse object with success message on successful addition else error message</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -83,10 +94,10 @@ namespace Use_Wheels.Controllers
                     return BadRequest("Car already present in wishlist");
                 }
                 else
-                    WishListRepository.AddToList(username, car);
+                {
+                    _service.AddToWishlist(username, car);
+                }
 
-                car.Likes = car.Likes + 1;
-                await _dbCar.UpdateAsync(car);
                 Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
                 _response.Result = "Car added to wish-list successfully!!";
                 _response.StatusCode = HttpStatusCode.Created;
@@ -100,6 +111,11 @@ namespace Use_Wheels.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Controller method to delete a car from wishlist of a particular user
+        /// </summary>
+        /// <param name="vehicle_no"></param>
+        /// <returns>APIResponse object with success message on successful deletion else not found</returns>
         [HttpDelete("{vehicle_no}", Name = "DeleteElementFromWishList")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -108,20 +124,9 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> DeleteElementFromWishList(string vehicle_no)
         {
-
-            if (vehicle_no == null)
-            {
-                return BadRequest("Vehicle no. is mandatory");
-            }
-
             string username = HttpContext.User.Identity.Name;
+            _service.DeleteElementFromWishList(vehicle_no, username);
             
-            int deleteResult = WishListRepository.DeleteFromList(username, vehicle_no);
-
-            if (deleteResult == -1)
-                return NotFound();
-            
-            Log.Information("Condition result: {@Result}", deleteResult);
             _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
             _response.Result = "Car deleted successfully from wishlist!!";

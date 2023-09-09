@@ -44,10 +44,9 @@ namespace Use_Wheels.Auth
                     await _next(httpContext);
                 string tokenValue = header.ElementAtOrDefault(1);
 
-                //if (authHandler.IsValidToken(tokenValue, issuer, audience, metaDataAddress))
-                //    await _next(httpContext);
                 var redis = ConnectionMultiplexer.Connect("localhost:6379");
                 IDatabase db = redis.GetDatabase();
+
                 // Retrieve the value associated with a key from this specific database
                 var value = db.StringGet(tokenValue);
 
@@ -59,8 +58,9 @@ namespace Use_Wheels.Auth
             }
             catch (Exception)
             {
-                httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                HttpResponseWritingExtensions.WriteAsync(httpContext.Response, "{\"message\": \"Unauthorized\"}").Wait();
+                throw new BadHttpRequestException("Unauthorized", 401);
+                //httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                //HttpResponseWritingExtensions.WriteAsync(httpContext.Response, "{\"message\": \"Unauthorized\"}").Wait();
             }
             await _next(httpContext);
         }

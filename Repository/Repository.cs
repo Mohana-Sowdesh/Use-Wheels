@@ -17,12 +17,14 @@ namespace Use_Wheels.Repository
             this.dbSet = _db.Set<T>();
         }
 
+        // Method to create a new record in DB
         public async Task CreateAsync(T entity)
         {
             await dbSet.AddAsync(entity);
             await SaveAsync();
         }
 
+        // Method to get a particular record from DB
         public virtual async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -45,6 +47,7 @@ namespace Use_Wheels.Repository
             return await query.FirstOrDefaultAsync();
         }
 
+        // Method to get all data
         public virtual async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null,
             int pageSize = 0, int pageNumber = 1)
         {
@@ -72,12 +75,14 @@ namespace Use_Wheels.Repository
             return await query.ToListAsync();
         }
 
+        // Method to delete a row from DB
         public virtual async Task RemoveAsync(T entity)
         {
             dbSet.Remove(entity);
             await SaveAsync();
         }
 
+        // Method to save the changes done in DB
         public async Task SaveAsync()
         {
             await _db.SaveChangesAsync();

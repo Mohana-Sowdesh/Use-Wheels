@@ -39,7 +39,7 @@ namespace Use_Wheels.Services
 
             int result = adminCarUtility.isVehicleNoSame(carDTO);
             if (result == -1)
-                throw new BadHttpRequestException("Vehicle no. in the requests doesn't match", 404);
+                throw new BadHttpRequestException("Vehicle no. in the requests doesn't match", 400);
 
             Car car = _mapper.Map<Car>(carDTO);
             await _dbCar.CreateAsync(car);

@@ -9,12 +9,14 @@ namespace Use_Wheels
 	{
 		public MappingConfig()
 		{
-			CreateMap<RegisterationRequestDTO, UserDTO>();
-			CreateMap<CarDTO, Car>();
-			CreateMap<CategoryDTO, Category>();
-			CreateMap<CarDTO, Car>();
-            CreateMap<CarUpdateDTO, Car>();
-			CreateMap<OrderDTO, Orders>();
+			CreateMap<RegisterationRequestDTO, UserDTO>().ReverseMap();
+            CreateMap<RegisterationRequestDTO, User>().ReverseMap();
+			CreateMap<UserDTO, User>().ReverseMap();
+            CreateMap<CarDTO, Car>().ReverseMap();
+			CreateMap<CategoryDTO, Category>().ReverseMap();
+			CreateMap<CarDTO, Car>().ReverseMap();
+            CreateMap<CarUpdateDTO, Car>().ReverseMap();
+			CreateMap<OrderDTO, Orders>().ReverseMap();
         }
 	}
 }

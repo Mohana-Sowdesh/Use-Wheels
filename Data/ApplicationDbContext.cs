@@ -8,13 +8,13 @@ using Use_Wheels.Models.DTO;
 
 namespace Use_Wheels.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<UserDTO>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
-        public DbSet<UserDTO> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Orders> Orders { get; set; }

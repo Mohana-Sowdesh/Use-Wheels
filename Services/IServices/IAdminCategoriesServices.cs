@@ -7,8 +7,8 @@ namespace Use_Wheels.Services.IServices
 	public interface IAdminCategoriesServices
 	{
         Task<IEnumerable<Category>> GetAllCategories();
-        Task CreateCategory(Category category);
-        Task DeleteCategory(Category category);
+        Task<Category> CreateCategory(CategoryDTO categoryDTO);
+        Task DeleteCategory(int id);
     }
 }
 

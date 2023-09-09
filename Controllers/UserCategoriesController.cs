@@ -1,14 +1,6 @@
-﻿using System;
-using AutoMapper;
-using System.Net;
+﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Use_Wheels.Data;
-using Use_Wheels.Models.DTO;
-using Microsoft.EntityFrameworkCore;
-using System.Data;
 using Microsoft.AspNetCore.Authorization;
-using Use_Wheels.Repository.IRepository;
-using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -17,14 +9,12 @@ namespace Use_Wheels.Controllers
     [Authorize(Roles = "customer")]
     public class UserCategoriesController : ControllerBase
 	{
-        protected APIResponse _response;
-        private readonly IMapper _mapper;
+        protected APIResponseDTO _response;
         private IUserCategoriesServices _service;
 
-        public UserCategoriesController(IUserCategoriesServices service, IMapper mapper)
+        public UserCategoriesController(IUserCategoriesServices service)
         {
             _service = service;
-            _mapper = mapper;
             _response = new();
         }
 
@@ -35,7 +25,7 @@ namespace Use_Wheels.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ResponseCache(CacheProfileName = "Default30")]
-        public async Task<ActionResult<APIResponse>> GetCategories()
+        public async Task<ActionResult<APIResponseDTO>> GetCategories()
         {
             IEnumerable<Category> categoryList = await _service.GetCategories();
 

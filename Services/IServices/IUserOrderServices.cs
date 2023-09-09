@@ -6,7 +6,7 @@ namespace Use_Wheels.Services.IServices
 {
 	public interface IUserOrderServices
 	{
-        Task CreateOrder(Car car, Orders order);
+        Task<Orders> CreateOrder(OrderDTO orderDTO);
     }
 }
 

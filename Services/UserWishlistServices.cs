@@ -1,13 +1,4 @@
-﻿using System;
-using System.Runtime.ConstrainedExecution;
-using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository;
-using Use_Wheels.Repository.IRepository;
-using Use_Wheels.Services.IServices;
-
-namespace Use_Wheels.Services
+﻿namespace Use_Wheels.Services
 {
 	public class UserWishlistServices : IUserWishlistServices
     {
@@ -24,11 +15,28 @@ namespace Use_Wheels.Services
         /// <param name="username"></param>
         /// <param name="car"><see cref="Car"/></param>
         /// <returns></returns>
-        public async Task AddToWishlist(string username, Car car)
+        public async Task AddToWishlist(string vehicle_no, string username)
         {
-            WishListRepository.AddToList(username, car);
-            car.Likes = car.Likes + 1;
-            await _dbCar.UpdateAsync(car);
+            Car car = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no, includeProperties: "Rc_Details");
+            if (car == null || car.Availability == "sold")
+                throw new BadHttpRequestException("Uh-oh, the requested car cannot be found", 400);
+
+            bool isUserInWishlist = WishListRepository.IsUserExists(username);
+            List<Car> userCars;
+
+            if (!isUserInWishlist)
+                WishListRepository.CreateNewList(username);
+
+            bool exists = WishListRepository.GetUserWishlist(username).Any(x => x.Vehicle_No == car.Vehicle_No);
+
+            if (exists)
+                throw new BadHttpRequestException("Car already present in wishlist", 400);
+            else
+            {
+                WishListRepository.AddToList(username, car);
+                car.Likes = car.Likes + 1;
+                await _dbCar.UpdateAsync(car);
+            }
         }
 
         /// <summary>

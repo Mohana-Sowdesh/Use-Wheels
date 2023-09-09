@@ -13,7 +13,7 @@ namespace Use_Wheels.Controllers
     [Authorize(Roles = "admin")]
     public class AdminLogoutController : ControllerBase
 	{
-        protected APIResponse _response;
+        protected APIResponseDTO _response;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AdminLogoutController(IHttpContextAccessor httpContextAccessor)
@@ -27,14 +27,14 @@ namespace Use_Wheels.Controllers
         /// </summary>
         /// <returns>APIResponse object with success message as result</returns>
         [HttpPost("logout")]
-        public async Task<ActionResult<APIResponse>> Logout()
+        public async Task<ActionResult<APIResponseDTO>> Logout()
         {
             try
             {
-                var jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
-                var redis = ConnectionMultiplexer.Connect("localhost:6379");
-                IDatabase db = redis.GetDatabase();
-                await db.StringSetAndGetAsync(jwtToken, new RedisValue("1"), new TimeSpan(24, 0, 0));
+                string jwtToken = _httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Split(" ")[1];
+
+                LogoutUtility logoutUtility = new LogoutUtility();
+                await logoutUtility.InvalidateToken(jwtToken);
 
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;

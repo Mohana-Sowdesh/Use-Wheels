@@ -1,18 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace Use_Wheels.Models.DTO
+namespace Use_Wheels.Models
 {
-	public class UserDTO 
+	public class User : IdentityUser
     {
-        [RegularExpression("^[A-Za-z0-9]+$", ErrorMessage = "Username can only contain letters and numbers.")]
-        public string UserName { get; set; }
-
-        public string? Role { get; set; }
-
-        public string Email { get; set; }
+        public string? Role { get; set; } = "customer";
 
         [Required]
         [RegularExpression("[a-zA-Z]+")]

@@ -1,8 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using Use_Wheels.Models.DTO;
-
-namespace Use_Wheels.Services.IServices
+﻿namespace Use_Wheels.Services.IServices
 {
 	public interface IUserWishlistServices
 	{
@@ -10,7 +6,7 @@ namespace Use_Wheels.Services.IServices
         IEnumerable<Car> GetWishlist(string username);
 
         //Method to add a car to wishlist of that user
-        Task AddToWishlist(string username, Car car);
+        Task AddToWishlist(string vehicle_no, string username);
 
         //Method to delete a car from wishlist of a particular user
         Task DeleteElementFromWishList(string vehicle_no, string username);

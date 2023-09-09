@@ -1,16 +1,8 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository.IRepository;
-using Use_Wheels.Models;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
-using Use_Wheels.Data;
-using System.Data;
 using Microsoft.AspNetCore.Authorization;
-using Use_Wheels.Services.IServices;
 
 namespace Use_Wheels.Controllers
 {
@@ -19,16 +11,12 @@ namespace Use_Wheels.Controllers
     [Authorize(Roles = "customer")]
     public class UserCarController : ControllerBase
     {
-        protected APIResponse _response;
-        private ICarRepository _dbCar;
-        private readonly IMapper _mapper;
+        protected APIResponseDTO _response;
         private readonly IUserCarServices _service;
 
-        public UserCarController( ICarRepository dbCar, IMapper mapper, IUserCarServices service)
+        public UserCarController(IUserCarServices service)
         {
             _service = service;
-            _dbCar = dbCar;
-            _mapper = mapper;
             _response = new();
         }
 
@@ -44,28 +32,18 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<APIResponse>> GetCars([FromQuery(Name = "categoryId")] int? categoryId,
+        public async Task<ActionResult<APIResponseDTO>> GetCars([FromQuery(Name = "categoryId")] int? categoryId,
             [FromQuery] int pageSize = 0, int pageNumber = 1)
         {
-            try
-            {
                 IEnumerable<Car> carList = await _service.GetCars(categoryId, pageSize, pageNumber);
 
+                // Adds page number and page size info to response headers
                 Pagination pagination = new() { PageNumber = pageNumber, PageSize = pageSize };
-
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
+
                 _response.Result = carList;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
-
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
-            }
-            return _response;
 
         }
 
@@ -81,31 +59,13 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<APIResponse>> GetCarById(string vehicle_no)
+        public async Task<ActionResult<APIResponseDTO>> GetCarById(string vehicle_no)
         {
-            try
-            {
-                if (vehicle_no == null)
-                {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    return BadRequest(_response);
-                }
-                Car car = await _service.GetCarById(vehicle_no);
-                if (car == null)
-                {
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    return NotFound(_response);
-                }
-                _response.Result = car;
-                _response.StatusCode = HttpStatusCode.OK;
-                return Ok(_response);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
-            }
-            return _response;
+            Car car = await _service.GetCarById(vehicle_no);
+                
+            _response.Result = car;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
         }
     }
 }

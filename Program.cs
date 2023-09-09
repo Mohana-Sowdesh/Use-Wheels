@@ -40,7 +40,7 @@ var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 builder.Services.AddEndpointsApiExplorer();
 
 // Configures and adds identity management services
-builder.Services.AddIdentity<UserDTO, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<UserDTO>>("Demo");
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<User>>("Demo");
 
 // Gets connection string from appsettings file
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -167,7 +167,8 @@ app.UseExceptionHandler(builder =>
         else
         {
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Response.WriteAsync("Unknown error");
+            var response = new { error = exception.Message };
+            await context.Response.WriteAsJsonAsync(response);
         }
     });
 });

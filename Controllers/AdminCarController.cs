@@ -18,7 +18,7 @@ namespace Use_Wheels.Controllers
     [Authorize(Roles = "admin")]
     public class AdminCarController : ControllerBase
 	{
-        protected APIResponse _response;
+        protected APIResponseDTO _response;
         private readonly IMapper _mapper;
         private readonly IAdminCarServices _service;
         private readonly ApplicationDbContext _db;
@@ -41,7 +41,7 @@ namespace Use_Wheels.Controllers
         [HttpGet]
         [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<APIResponse>> GetAllCars()
+        public async Task<ActionResult<APIResponseDTO>> GetAllCars()
         {
             IEnumerable<Car> carList = await _service.GetAllCars();
 
@@ -64,7 +64,7 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "Default30")]
-        public async Task<ActionResult<APIResponse>> GetCarById(string vehicle_no)
+        public async Task<ActionResult<APIResponseDTO>> GetCarById(string vehicle_no)
         {
             var car = await _service.GetCarById(vehicle_no);
                 
@@ -82,22 +82,13 @@ namespace Use_Wheels.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<APIResponse>> AddCar([FromBody] CarDTO carDTO)
+        public async Task<ActionResult<APIResponseDTO>> AddCar([FromBody] CarDTO carDTO)
         {
-            try
-            { 
-                Car car = await _service.AddCar(carDTO);
+            Car car = await _service.AddCar(carDTO);
                 
-                _response.Result = car;
-                _response.StatusCode = HttpStatusCode.Created;
-                return CreatedAtRoute("GetCar", new { vehicle_no = car.Vehicle_No }, _response);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
-            }
-            return _response;
+            _response.Result = car;
+            _response.StatusCode = HttpStatusCode.Created;
+            return CreatedAtRoute("GetCar", new { vehicle_no = car.Vehicle_No }, _response);
         }
 
         /// <summary>
@@ -111,7 +102,7 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> DeleteCar(string vehicle_no)
+        public async Task<ActionResult<APIResponseDTO>> DeleteCar(string vehicle_no)
         {
             try
             { 
@@ -138,7 +129,7 @@ namespace Use_Wheels.Controllers
         [HttpPut("{vehicle_no}", Name = "UpdateCar")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> UpdateCar(string vehicle_no, [FromBody] CarUpdateDTO carUpdateDTO)
+        public async Task<ActionResult<APIResponseDTO>> UpdateCar(string vehicle_no, [FromBody] CarUpdateDTO carUpdateDTO)
         {
             try
             {   

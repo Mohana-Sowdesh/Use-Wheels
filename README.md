@@ -60,5 +60,5 @@ Expected Deliverables:
 - Readme file for instructions to setup & test  
 - Db dump (If local SQL database is used) or JSON Document (If local Mongo is used)
 
-  DB diagram: https://miro.com/app/board/uXjVMtDVqZk=/?share_link_id=543168436707
+  DB diagram: https://miro.com/app/board/uXjVMtDVqZk=/?share_link_id=543168436707     
   POSTMAN collection link: https://documenter.getpostman.com/view/27198291/2s9Y5SVR8H#513c7e60-2bdc-41f8-8740-92bb6d030d51

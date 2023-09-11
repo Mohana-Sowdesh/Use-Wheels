@@ -1,10 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository.IRepository;
-using Use_Wheels.Services.IServices;
-
-namespace Use_Wheels.Services
+﻿namespace Use_Wheels.Services
 {
 	public class UserCategoriesServices : IUserCategoriesServices
 	{
@@ -15,6 +9,10 @@ namespace Use_Wheels.Services
             _dbCategory = dbCategory;
         }
 
+        /// <summary>
+        /// Service method to get all categories from DB
+        /// </summary>
+        /// <returns>List of <see cref="Category"/>categories</returns>
         public async Task<IEnumerable<Category>> GetCategories()
         {
             IEnumerable<Category> categoryList = await _dbCategory.GetAllAsync();

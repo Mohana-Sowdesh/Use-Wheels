@@ -7,7 +7,7 @@ namespace Use_Wheels.Controllers
 {
     [Route("user/cars/order")]
     [ApiController]
-    [Authorize(Roles = "customer")]
+    [Authorize(Roles = Constants.Roles.CUSTOMER)]
     public class UserOrderController :ControllerBase
 	{
         protected APIResponseDTO _response;
@@ -33,7 +33,7 @@ namespace Use_Wheels.Controllers
 
             _response.Result = order;
             _response.StatusCode = HttpStatusCode.Created;
-            return Ok("Order placed successfully");
+            return Ok(Constants.OrderConstants.ORDER_SUCCESSFUL);
         }
     }
 }

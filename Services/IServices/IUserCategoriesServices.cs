@@ -6,6 +6,7 @@ namespace Use_Wheels.Services.IServices
 {
 	public interface IUserCategoriesServices
 	{
+        // Method to get all categories from DB
         Task<IEnumerable<Category>> GetCategories();
     }
 }

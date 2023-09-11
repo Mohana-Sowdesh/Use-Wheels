@@ -39,7 +39,7 @@ namespace Use_Wheels.Repository
             List<Car> userWishlist = WishListRepository.GetUserWishlist(username);
 
 			if (userWishlist == null)
-				throw new BadHttpRequestException("No cars to delete in wishlist", 404);
+				throw new BadHttpRequestException(Constants.WishlistConstants.NO_CARS_PRESENT, Constants.ResponseConstants.NOT_FOUND);
 
             var vehicle = userWishlist.Find(u => u.Vehicle_No == vehicle_no);
 

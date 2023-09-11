@@ -17,6 +17,7 @@ namespace Use_Wheels.Repository
             _db = db;
         }
 
+        // Method to update a car entity
         public async Task<Car> UpdateAsync(Car entity)
         {
             entity.Updated_Date = DateTime.Now;

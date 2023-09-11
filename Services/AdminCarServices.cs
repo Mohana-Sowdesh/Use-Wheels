@@ -1,12 +1,5 @@
-﻿using System;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Web.Http.ModelBinding;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Utility;
 
 namespace Use_Wheels.Services
 {
@@ -32,14 +25,14 @@ namespace Use_Wheels.Services
         public async Task<Car> AddCar(CarDTO carDTO)
         {
             if (await _dbCar.GetAsync(u => u.Vehicle_No.ToLower() == carDTO.Vehicle_No.ToLower()) != null)
-                throw new BadHttpRequestException("Car already exists!!", 400);
+                throw new BadHttpRequestException(Constants.CarConstants.CAR_ALREADY_EXISTS, Constants.ResponseConstants.BAD_REQUEST);
 
             if (carDTO == null)
-                throw new BadHttpRequestException("Request cannot be null", 400);
+                throw new BadHttpRequestException(Constants.CarConstants.DTO_NULL, Constants.ResponseConstants.BAD_REQUEST);
 
             int result = adminCarUtility.isVehicleNoSame(carDTO);
             if (result == -1)
-                throw new BadHttpRequestException("Vehicle no. in the requests doesn't match", 400);
+                throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NUM_NOT_MATCH, Constants.ResponseConstants.BAD_REQUEST);
 
             Car car = _mapper.Map<Car>(carDTO);
             await _dbCar.CreateAsync(car);
@@ -53,14 +46,16 @@ namespace Use_Wheels.Services
         /// <returns></returns>
         public async Task DeleteCar(string vehicle_no)
         {
-            if (vehicle_no == null)
-                throw new BadHttpRequestException("Vehicle number is mandatory", 400);
+            int validationResult = adminCarUtility.isVehicleNoValid(vehicle_no);
+
+            if (validationResult == 0)
+                throw new BadHttpRequestException(Constants.CarConstants.INVALID_VEHICLE_NUM, Constants.ResponseConstants.BAD_REQUEST);
 
             var vehicle = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no);
             var rc = await _db.RC.FirstOrDefaultAsync(u => u.Vehicle_No == vehicle_no);
 
             if (vehicle == null)
-                throw new BadHttpRequestException("Vehicle not found", 404);
+                throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NOT_FOUND, Constants.ResponseConstants.NOT_FOUND);
 
             await _dbCar.RemoveAsync(vehicle);
             _db.RC.Remove(rc);
@@ -84,13 +79,15 @@ namespace Use_Wheels.Services
         /// <returns>Car object</returns>
         public async Task<Car> GetCarById(string vehicle_no)
         {
-            if (vehicle_no == null)
-                throw new BadHttpRequestException("Vehicle number cannot be null", 400);
+            int validationResult = adminCarUtility.isVehicleNoValid(vehicle_no);
+
+            if (validationResult == 0)
+                throw new BadHttpRequestException(Constants.CarConstants.INVALID_VEHICLE_NUM, Constants.ResponseConstants.BAD_REQUEST);
 
             var car = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no, includeProperties: "Rc_Details");
 
             if (car == null)
-                throw new BadHttpRequestException("Uh-oh, the requested vehicle is not found", 404); ;
+                throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NOT_FOUND, Constants.ResponseConstants.NOT_FOUND); ;
             return car;
         }
 
@@ -102,13 +99,18 @@ namespace Use_Wheels.Services
         /// <returns></returns>
         public async Task UpdateCar(string vehicle_no, CarUpdateDTO carUpdateDTO)
         {
-            if (carUpdateDTO == null || vehicle_no != carUpdateDTO.Vehicle_No)
-                throw new BadHttpRequestException("Vehicle no. doesn't match", 400);
+            int validationResult = adminCarUtility.isVehicleNoValid(vehicle_no);
+
+            if (validationResult == 0)
+                throw new BadHttpRequestException(Constants.CarConstants.INVALID_VEHICLE_NUM, Constants.ResponseConstants.BAD_REQUEST);
+
+            if (vehicle_no != carUpdateDTO.Vehicle_No)
+                throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NUM_NOT_MATCH, Constants.ResponseConstants.BAD_REQUEST);
 
             Car dbCar = await _dbCar.GetAsync(u => u.Vehicle_No == carUpdateDTO.Vehicle_No, false);
 
             if (dbCar == null)
-                throw new BadHttpRequestException("Uh-oh, the requested vehicle is not found", 404);
+                throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NOT_FOUND, Constants.ResponseConstants.NOT_FOUND);
 
             Car model = _mapper.Map<Car>(carUpdateDTO);
 

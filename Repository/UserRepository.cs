@@ -25,7 +25,7 @@ namespace Use_Wheels.Repository
             _db = db;
             _mapper = mapper;
             _userManager = userManager;
-            secretKey = configuration.GetValue<string>("ApiSettings:Secret");
+            secretKey = configuration.GetValue<string>(Constants.Configurations.JWT_SECRET_CONFIGURATION_KEY);
             _roleManager = roleManager;
             _logger = logger;
         }

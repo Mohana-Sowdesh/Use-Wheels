@@ -6,7 +6,7 @@ namespace Use_Wheels.Controllers
 {
     [Route("user/wishlist")]
     [ApiController]
-    [Authorize(Roles = "customer")]
+    [Authorize(Roles = Constants.Roles.CUSTOMER)]
     public class UserWishlistController : ControllerBase
     {
         protected APIResponseDTO _response;
@@ -30,12 +30,12 @@ namespace Use_Wheels.Controllers
             IEnumerable<Car> userWishlist = _service.GetWishlist(username);
             Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
 
-            if (userWishlist == null)
+            if (userWishlist == null || userWishlist.Count() == 0)
             {
-                Log.Error("No cars present in wishlist");
+                Log.Error(Constants.WishlistConstants.NO_CARS_PRESENT);
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
-                _response.Result = "No cars present in wishlist";
+                _response.Result = Constants.WishlistConstants.NO_CARS_PRESENT;
             }
             else
             {
@@ -60,7 +60,7 @@ namespace Use_Wheels.Controllers
             await _service.AddToWishlist(vehicle_no, username);
 
             Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
-            _response.Result = "Car added to wish-list successfully!!";
+            _response.Result = Constants.WishlistConstants.ADD_CAR_SUCCESS;
             _response.StatusCode = HttpStatusCode.Created;
             return Ok(_response);
         }
@@ -83,7 +83,7 @@ namespace Use_Wheels.Controllers
             
             _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
-            _response.Result = "Car deleted successfully from wishlist!!";
+            _response.Result = Constants.WishlistConstants.DELETE_CAR_SUCCESS;
             return Ok(_response);
         }
 

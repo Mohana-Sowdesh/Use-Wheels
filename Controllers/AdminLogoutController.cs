@@ -10,7 +10,7 @@ namespace Use_Wheels.Controllers
 {
     [Route("/admin")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = Constants.Roles.ADMIN)]
     public class AdminLogoutController : ControllerBase
 	{
         protected APIResponseDTO _response;
@@ -38,7 +38,7 @@ namespace Use_Wheels.Controllers
 
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
-                _response.Result = "Logout successful";
+                _response.Result = Constants.LogoutConstants.LOGOUT_SUCCESSFUL;
                 return Ok(_response);
             }
             catch (Exception e)

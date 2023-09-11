@@ -10,6 +10,7 @@ namespace Use_Wheels.Utility
             _db = db;
         }
 
+        // Method to check if the requested username & email are unique or not
         public int IsUniqueUser(string username, string email)
         {
             var user = _db.Users.FirstOrDefault(x => x.UserName == username);
@@ -28,6 +29,7 @@ namespace Use_Wheels.Utility
             return 1;
         }
 
+        // Method to check if the requesting user's age is above 18
         public bool IsAbove18(DateOnly Dob)
         {
             int birthYear = Dob.Year;

@@ -1,12 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository.IRepository;
-using System.Data;
 using Microsoft.AspNetCore.Authorization;
-using Use_Wheels.Repository;
-using StackExchange.Redis;
 
 namespace Use_Wheels.Controllers
 {
@@ -38,10 +32,10 @@ namespace Use_Wheels.Controllers
             var loginResponse = await _userRepo.Login(model);
             if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
             {
-                _logger.LogError("Invalid credentials entered");
+                _logger.LogError(Constants.LoginConstants.INVALID_CREDENTIALS);
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
-                _response.ErrorMessages.Add("Username or password is incorrect");
+                _response.ErrorMessages.Add(Constants.LoginConstants.INVALID_CREDENTIALS);
                 return BadRequest(_response);
             }
             _response.StatusCode = HttpStatusCode.OK;
@@ -63,7 +57,7 @@ namespace Use_Wheels.Controllers
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
-                _response.ErrorMessages.Add("Error while registering - User must above or equal to 18 years of age");
+                _response.ErrorMessages.Add(Constants.LoginConstants.INVALID_AGE);
                 return BadRequest(_response);
             }
             _response.StatusCode = HttpStatusCode.OK;
@@ -76,7 +70,7 @@ namespace Use_Wheels.Controllers
         /// </summary>
         /// <returns>APIResponse object with success code on success or error message(s) on error</returns>
         [HttpPost("user/logout")]
-        [Authorize(Roles = "customer")] // Ensures only authenticated users can log out
+        [Authorize(Roles = Constants.Roles.CUSTOMER)] // Ensures only authenticated users can log out
         public async Task<ActionResult<APIResponseDTO>> Logout()
         {
             string username = HttpContext.User.Identity.Name;
@@ -90,7 +84,7 @@ namespace Use_Wheels.Controllers
 
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
-                _response.Result = "Logout successful";
+                _response.Result = Constants.LogoutConstants.LOGOUT_SUCCESSFUL;
                 return Ok(_response);
             }
             catch(Exception e)

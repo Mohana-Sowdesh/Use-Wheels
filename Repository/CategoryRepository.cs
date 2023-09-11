@@ -14,8 +14,6 @@ namespace Use_Wheels.Repository
         {
             _db = db;
         }
-
-
     }
 }
 

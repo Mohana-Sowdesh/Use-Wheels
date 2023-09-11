@@ -7,6 +7,7 @@ namespace Use_Wheels.Auth
     public class AuthConfigManager
     {
         private static IConfigurationManager<OpenIdConnectConfiguration> configManager;
+
         private static IConfigurationManager<OpenIdConnectConfiguration> GetConfigurationManager(string metadataAddress)
         {
             if (configManager == null)
@@ -15,6 +16,7 @@ namespace Use_Wheels.Auth
             }
             return configManager;
         }
+
         public static OpenIdConnectConfiguration GetMetaData(string metadataAddress)
         {
             var configManager = GetConfigurationManager(metadataAddress);

@@ -3,6 +3,7 @@
 	public class UserWishlistServices : IUserWishlistServices
     {
         private ICarRepository _dbCar;
+        AdminCarUtility adminCarUtility = new AdminCarUtility();
 
         public UserWishlistServices(ICarRepository dbCar)
 		{
@@ -12,14 +13,14 @@
         /// <summary>
         /// Service method to add a car to wishlist of that user
         /// </summary>
+        /// <param name="vehicle_no"></param>
         /// <param name="username"></param>
-        /// <param name="car"><see cref="Car"/></param>
         /// <returns></returns>
         public async Task AddToWishlist(string vehicle_no, string username)
         {
             Car car = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no, includeProperties: "Rc_Details");
-            if (car == null || car.Availability == "sold")
-                throw new BadHttpRequestException("Uh-oh, the requested car cannot be found", 400);
+            if (car == null || car.Availability == Constants.OrderConstants.SOLD)
+                throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NOT_FOUND, Constants.ResponseConstants.BAD_REQUEST);
 
             bool isUserInWishlist = WishListRepository.IsUserExists(username);
             List<Car> userCars;
@@ -30,7 +31,7 @@
             bool exists = WishListRepository.GetUserWishlist(username).Any(x => x.Vehicle_No == car.Vehicle_No);
 
             if (exists)
-                throw new BadHttpRequestException("Car already present in wishlist", 400);
+                throw new BadHttpRequestException(Constants.WishlistConstants.CAR_ALREADY_PRESENT, Constants.ResponseConstants.BAD_REQUEST);
             else
             {
                 WishListRepository.AddToList(username, car);
@@ -45,18 +46,19 @@
         /// <param name="vehicle_no"></param>
         /// <param name="username"></param>
         /// <returns></returns>
-        public Task DeleteElementFromWishList(string vehicle_no, string username)
+        public void DeleteElementFromWishList(string vehicle_no, string username)
         {
-            if (vehicle_no == null)
-                throw new BadHttpRequestException("Vehicle no. is mandatory", 400);
+            int validationResult = adminCarUtility.isVehicleNoValid(vehicle_no);
+
+            if (validationResult == 0)
+                throw new BadHttpRequestException(Constants.CarConstants.INVALID_VEHICLE_NUM, Constants.ResponseConstants.BAD_REQUEST);
 
             int deleteResult = WishListRepository.DeleteFromList(username, vehicle_no);
 
             if (deleteResult == -1)
-                throw new BadHttpRequestException("Vehicle not found", 404);
+                throw new BadHttpRequestException(Constants.WishlistConstants.VEHICLE_NOT_FOUND, Constants.ResponseConstants.BAD_REQUEST);
 
             Log.Information("Condition result: {@Result}", deleteResult);
-            return Task.CompletedTask;
         }
 
         /// <summary>

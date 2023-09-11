@@ -9,7 +9,7 @@
         Task AddToWishlist(string vehicle_no, string username);
 
         //Method to delete a car from wishlist of a particular user
-        Task DeleteElementFromWishList(string vehicle_no, string username);
+        void DeleteElementFromWishList(string vehicle_no, string username);
     }
 }
 

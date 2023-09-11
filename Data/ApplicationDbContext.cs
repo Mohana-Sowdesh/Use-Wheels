@@ -24,6 +24,7 @@ namespace Use_Wheels.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Data to be seeded during model creation
             modelBuilder.Entity<Category>().HasData(
                 new Category
                 {

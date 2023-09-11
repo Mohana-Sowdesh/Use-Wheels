@@ -12,27 +12,24 @@ namespace Use_Wheels.Models.DTO
         public required string Vehicle_No { get; set; }
         
         [Required]
-        //[RegularExpression("^\\d{4}$-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "Please enter a valid date")]
         public DateOnly Date_Of_Reg { get; set; }
 
 		[Required]
-        //[RegularExpression("^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "Please enter a valid date")]
         public DateOnly Reg_Valid_Upto { get; set; }
 
 		[Required]
-        [RegularExpression("^[a-zA-Z]+\\s*$", ErrorMessage = "Owner name must contain only letters")]
+        [RegularExpression("^[a-zA-Z\\s]+$", ErrorMessage = "Owner name must contain only letters")]
         public string Owner_Name { get; set; }
 
         [Required]
-        //[RegularExpression("^[a-zA-Z]+\\s*$", ErrorMessage = "Address must contain only letters")]
+        [RegularExpression("^[a-zA-Z\\s]+$", ErrorMessage = "Address must contain only letters")]
         public string Owner_Address { get; set; }
 
         [Required]
-        //[RegularExpression("^[A-Za-z]+\\s?-?[A-Za-z]*$", ErrorMessage = "Please enter a valid board type")]
+        [RegularExpression("^[A-Za-z-\\s]+$", ErrorMessage = "Please enter a valid board type")]
         public string Board_Type { get; set; }
 
         [Required]
-        //[RegularExpression("^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "Please enter a valid date")]
         public DateOnly FC_Validity { get; set; }
 
 		[Required]

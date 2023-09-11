@@ -32,8 +32,8 @@ namespace Use_Wheels.Auth
             {
                 var path = httpContext.Request.Path;
                 string token = string.Empty;
-                string issuer = _configuration["JwtToken:Issuer"]; //Get issuer value from your configuration
-                string audience = _configuration["JwtToken:Audience"]; //Get audience value from your configuration
+                string issuer = _configuration[Constants.Authorization.JWT_TOKEN_ISSUER]; //Get issuer value from your configuration
+                string audience = _configuration[Constants.Authorization.JWT_TOKEN_AUDIENCE]; //Get audience value from your configuration
                 string metaDataAddress = issuer + "/.well-known/oauth-authorization-server";
                 CustomAuthHandler authHandler = new CustomAuthHandler();
 
@@ -44,23 +44,21 @@ namespace Use_Wheels.Auth
                     await _next(httpContext);
                 string tokenValue = header.ElementAtOrDefault(1);
 
-                var redis = ConnectionMultiplexer.Connect("localhost:6379");
+                var redis = ConnectionMultiplexer.Connect(Constants.Configurations.REDIS_CONNECTION_KEY);
                 IDatabase db = redis.GetDatabase();
 
-                // Retrieve the value associated with a key from this specific database
+                // Retrieve the value associated with a key from Redis database
                 var value = db.StringGet(tokenValue);
 
-                if (value == "1")
+                if (value == Constants.Authorization.JWT_BLACKLISTED_TOKEN_VALUE)
                 {
-                    throw new Exception("404 - Authorization failed");
+                    throw new BadHttpRequestException(Constants.Authorization.AUTHORIZATION_FAILED, Constants.ResponseConstants.BAD_REQUEST);
                 }
 
             }
             catch (Exception)
             {
-                throw new BadHttpRequestException("Unauthorized", 401);
-                //httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                //HttpResponseWritingExtensions.WriteAsync(httpContext.Response, "{\"message\": \"Unauthorized\"}").Wait();
+                throw new BadHttpRequestException(Constants.Authorization.UNAUTHORIZED, Constants.ResponseConstants.UNAUTHORIZED);
             }
             await _next(httpContext);
         }

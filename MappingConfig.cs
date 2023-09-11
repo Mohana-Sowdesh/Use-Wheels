@@ -9,6 +9,7 @@ namespace Use_Wheels
 	{
 		public MappingConfig()
 		{
+			// Creates a mapping from the source to destination and vice versa
 			CreateMap<RegisterationRequestDTO, UserDTO>().ReverseMap();
             CreateMap<RegisterationRequestDTO, User>().ReverseMap();
 			CreateMap<UserDTO, User>().ReverseMap();

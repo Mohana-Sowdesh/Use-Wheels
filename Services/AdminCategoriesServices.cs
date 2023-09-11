@@ -1,11 +1,4 @@
-﻿using System;
-using System.Web.Http.ModelBinding;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository.IRepository;
-using Use_Wheels.Services.IServices;
-using static StackExchange.Redis.Role;
+﻿using AutoMapper;
 
 namespace Use_Wheels.Services
 {
@@ -20,29 +13,44 @@ namespace Use_Wheels.Services
             _dbCategory = dbCategory;
         }
 
+        /// <summary>
+        /// Service method to create a new category
+        /// </summary>
+        /// <param name="categoryDTO"><see cref="CategoryDTO"/></param>
+        /// <returns><see cref="Category"/>Category object</returns>
         public async Task<Category> CreateCategory(CategoryDTO categoryDTO)
         {
             if (await _dbCategory.GetAsync(u => u.Category_Names.ToLower() == categoryDTO.Category_Names.ToLower()) != null)
-                throw new BadHttpRequestException("Category already exists!!", 400);
+                throw new BadHttpRequestException(Constants.CategoryConstants.CATEGORY_ALREADY_EXISTS, Constants.ResponseConstants.BAD_REQUEST);
 
             Category category = _mapper.Map<Category>(categoryDTO);
             await _dbCategory.CreateAsync(category);
             return category;
         }
 
+        /// <summary>
+        /// Service method to delete a category from DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task DeleteCategory(int id)
         {
             if (id <= 0)
-                throw new BadHttpRequestException("ID cannot be lesser than or equal to 0", 400);
+                throw new BadHttpRequestException(Constants.CategoryConstants.ID_VALIDATION, Constants.ResponseConstants.BAD_REQUEST);
 
             Category category = await _dbCategory.GetAsync(u => u.Category_Id == id);
 
             if (category == null)
-                throw new BadHttpRequestException("Requested category is not found", 404);
+                throw new BadHttpRequestException(Constants.CategoryConstants.CATEGORY_NOT_FOUND, Constants.ResponseConstants.NOT_FOUND);
 
             await _dbCategory.RemoveAsync(category);
         }
 
+        /// <summary>
+        /// Service method to get all categories from DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Category>> GetAllCategories()
         {
            IEnumerable<Category> categoryList = await _dbCategory.GetAllAsync();

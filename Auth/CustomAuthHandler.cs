@@ -36,23 +36,23 @@ namespace Use_Wheels.Auth
                     var _);
                 var scope = claim.FindFirst(c => c.Type.ToLower() == "<Here Scope Type>" && (c.Value.ToLower() == "<Here Scope>"));
                 if (scope == null)
-                    throw new Exception("404 - Authorization failed - Invalid Scope");
+                    throw new BadHttpRequestException(Constants.Authorization.INVALID_SCOPE_AUTHORIZATION_FAILED, Constants.ResponseConstants.NOT_FOUND);
 
-                var redis = ConnectionMultiplexer.Connect("localhost:6379");
+                var redis = ConnectionMultiplexer.Connect(Constants.Configurations.REDIS_CONNECTION_KEY);
                 IDatabase db = redis.GetDatabase();
                 // Retrieve the value associated with a key from this specific database
                 var value = db.StringGet(jwtToken);
 
                 if(value == "1")
                 {
-                    throw new Exception("404 - Authorization failed");
+                    throw new BadHttpRequestException(Constants.Authorization.AUTHORIZATION_FAILED, Constants.ResponseConstants.NOT_FOUND);
                 }
 
                 return true;
             }
             catch (Exception ex)
             {
-                throw new Exception("404 - Authorization failed", ex);
+                throw new BadHttpRequestException(Constants.Authorization.AUTHORIZATION_FAILED, Constants.ResponseConstants.NOT_FOUND);
             }
         }
     }

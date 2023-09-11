@@ -1,49 +1,43 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Use_Wheels;
-using Use_Wheels.Data;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository;
-using Use_Wheels.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Use_Wheels.Auth;
-using Use_Wheels.Services.IServices;
 using Use_Wheels.Services;
 using Microsoft.AspNetCore.Diagnostics;
-using System.Text.Json;
 
 // Sets up the builder object for creating a web application
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container. Also creates a cache profile named as 'Default 30'
 builder.Services.AddControllers(option => {
-    option.CacheProfiles.Add("Default30",
+    option.CacheProfiles.Add(Constants.Configurations.CACHE_PROFILE_NAME,
        new CacheProfile()
        {
-           Duration = 30
+           Duration = 20
        });
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
 // Adds response caching to the application's services
 builder.Services.AddResponseCaching();
+builder.Services.AddMemoryCache();
 
 // Gets the secret key from appsettings file
-var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
+var key = builder.Configuration.GetValue<string>(Constants.Configurations.JWT_SECRET_CONFIGURATION_KEY);
 
 // Configures and adds the API Explorer is a tool that generates documentation for API, including information about routes, controllers, actions, request and response models
 builder.Services.AddEndpointsApiExplorer();
 
 // Configures and adds identity management services
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<User>>("Demo");
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<User>>(Constants.Configurations.TOKEN_PROVIDER_NAME);
 
 // Gets connection string from appsettings file
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString(Constants.Configurations.SQL_CONFIGURATION_KEY);
 
 // Adds DbContext to the application
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -71,7 +65,7 @@ builder.Services.AddAuthentication(x =>
 );
 
 // Connects to Redis DB
-var redis = ConnectionMultiplexer.Connect("localhost:6379");
+var redis = ConnectionMultiplexer.Connect(Constants.Configurations.REDIS_CONNECTION_KEY);
 builder.Services.AddScoped(s => redis.GetDatabase());
 
 // Configures authorization services
@@ -124,7 +118,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddSwaggerGen(options =>
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
+        Description = Constants.Swagger.JWT_SECURITY_DESCRIPTION,
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,

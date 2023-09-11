@@ -1,35 +1,25 @@
-﻿using System;
-using System.Data;
+﻿using System.Diagnostics;
 using System.Net;
-using System.Runtime.ConstrainedExecution;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Use_Wheels.Data;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Repository.IRepository;
-using Use_Wheels.Services.IServices;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Use_Wheels.Controllers
 {
     [Route("admin/cars")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = Constants.Roles.ADMIN)]
     public class AdminCarController : ControllerBase
 	{
         protected APIResponseDTO _response;
-        private readonly IMapper _mapper;
         private readonly IAdminCarServices _service;
-        private readonly ApplicationDbContext _db;
-        private ICarRepository _dbCar;
+        private readonly IMemoryCache _cache;
+        private const string AllCarsCacheKey = "AllCars";
 
-        public AdminCarController(IMapper mapper, IAdminCarServices service, ApplicationDbContext db, ICarRepository dbCar)
+        public AdminCarController(IAdminCarServices service, IMemoryCache cache)
         {
-            _db = db;
-            _dbCar = dbCar;
+            _cache = cache;
             _service = service;
-            _mapper = mapper;
             _response = new();
         }
 
@@ -39,11 +29,17 @@ namespace Use_Wheels.Controllers
         /// <param></param>
         /// <returns>APIResponse object consisting list of <see cref="Car"/>Car with RC details</returns>
         [HttpGet]
-        [ResponseCache(CacheProfileName = "Default30")]
+        [ResponseCache(CacheProfileName = Constants.Configurations.CACHE_PROFILE_NAME)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponseDTO>> GetAllCars()
         {
             IEnumerable<Car> carList = await _service.GetAllCars();
+
+            if (!_cache.TryGetValue(AllCarsCacheKey, out IEnumerable<Car> cars))
+            {
+                // Add data to cache with a cache key and a short duration
+                _cache.Set(AllCarsCacheKey, carList, TimeSpan.FromSeconds(30));
+            }
 
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
@@ -63,11 +59,10 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<APIResponseDTO>> GetCarById(string vehicle_no)
         {
             var car = await _service.GetCarById(vehicle_no);
-                
+
             _response.Result = car;
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
@@ -85,7 +80,10 @@ namespace Use_Wheels.Controllers
         public async Task<ActionResult<APIResponseDTO>> AddCar([FromBody] CarDTO carDTO)
         {
             Car car = await _service.AddCar(carDTO);
-                
+
+            _cache.Remove(AllCarsCacheKey);
+            _cache.Remove(UserCarController.AllUserCarsCacheKey);
+
             _response.Result = car;
             _response.StatusCode = HttpStatusCode.Created;
             return CreatedAtRoute("GetCar", new { vehicle_no = car.Vehicle_No }, _response);
@@ -104,20 +102,15 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponseDTO>> DeleteCar(string vehicle_no)
         {
-            try
-            { 
                 await _service.DeleteCar(vehicle_no);
+
+                // Cache invalidation
+                _cache.Remove(AllCarsCacheKey);
+                _cache.Remove(UserCarController.AllUserCarsCacheKey);
 
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };
-            }
-            return _response;
         }
 
         /// <summary>
@@ -134,6 +127,10 @@ namespace Use_Wheels.Controllers
             try
             {   
                 await _service.UpdateCar(vehicle_no, carUpdateDTO);
+
+                // Cache invalidation
+                _cache.Remove(AllCarsCacheKey);
+                _cache.Remove(UserCarController.AllUserCarsCacheKey);
 
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;

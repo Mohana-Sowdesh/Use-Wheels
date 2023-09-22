@@ -5,7 +5,8 @@ namespace Use_Wheels.Models
 {
 	public class User : IdentityUser
     {
-        public string? Role { get; set; } = "customer";
+        [Required]
+        public string Role { get; set; }
 
         [Required]
         [RegularExpression("[a-zA-Z]+")]
@@ -25,6 +26,10 @@ namespace Use_Wheels.Models
         [Required]
         [RegularExpression("a-zA-Z")]
         public string Gender { get; set; }
+
+        public bool isBlacked { get; set; } = false;
+
+        public DateTime Last_Login { get; set; }
     }
 }
 

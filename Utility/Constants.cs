@@ -31,7 +31,8 @@ namespace Use_Wheels.Utility
 		{
 			public const string ADMIN = "admin";
 			public const string CUSTOMER = "customer";
-		}
+            public const string SELLER = "seller";
+        }
 
 		public static class Pagination
 		{
@@ -44,6 +45,11 @@ namespace Use_Wheels.Utility
 
         }
 
+		public static class UnblackSeller
+		{
+			public const string USERNAME_NOT_FOUND = "Sorry!! The requested username is not found";
+		}
+
 		public static class OrderConstants
 		{
 			public const string ORDER_SUCCESSFUL = "Order placed successfully";
@@ -52,10 +58,16 @@ namespace Use_Wheels.Utility
 			public const string SOLD = "sold";
         }
 
+		public static class RegisterConstants
+		{
+			public const string INVALID_AGE = "User age is not above or equal to 18";
+        }
+
 		public static class LoginConstants
 		{
-			public const string INVALID_CREDENTIALS = "Credentials are incorrect";
+			public const string INVALID_CREDENTIALS = "Please enter valid credentials";
 			public const string INVALID_AGE = "Error while registering - User must above or equal to 18 years of age";
+			public const string USER_IS_BLACKED = "User is blacked!! Blacked user cannot login";
         }
 
 		public static class WishlistConstants
@@ -75,6 +87,8 @@ namespace Use_Wheels.Utility
 			public const string VEHICLE_NOT_FOUND = "Uh-oh, the requested vehicle is not found";
 			public const string NO_CARS_PRESENT = "Sorry!! No cars are present!!";
 			public const string INVALID_VEHICLE_NUM = "Please enter a valid vehicle number";
+			public const string MISSING_VEHICLE_ERROR = "A missing vehicle cannot be added to this site!!";
+			public const string CAR_TRIALED_WARNING_MSG = "Alert!! This car has undergone a legal trial. On ordering this car, you can enjoy a flat 18% discount:)";
         }
 
 		public static class CategoryConstants
@@ -82,6 +96,13 @@ namespace Use_Wheels.Utility
 			public const string CATEGORY_ALREADY_EXISTS = "Category already exists!!";
 			public const string ID_VALIDATION = "ID cannot be lesser than or equal to 0";
 			public const string CATEGORY_NOT_FOUND = "Requested category is not found";
+        }
+
+		public static class Utility
+		{
+			public const string MOCK_API_URL = "https://65014f45736d26322f5b7b24.mockapi.io/cosmo/usedcars";
+			public const int MISSING_TRIALED_CARS_CACHE_EXPIRATION = 20;
+
         }
 
         public static class ResponseConstants

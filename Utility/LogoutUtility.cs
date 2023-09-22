@@ -1,6 +1,4 @@
-﻿using System;
-using StackExchange.Redis;
-using Use_Wheels.Repository;
+﻿using StackExchange.Redis;
 
 namespace Use_Wheels.Utility
 {

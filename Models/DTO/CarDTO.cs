@@ -29,6 +29,8 @@ namespace Use_Wheels.Models.DTO
 
         public DateTime Updated_Date { get; set; } = DateTime.Now;
 
+        public string? TrialedCar { get; set; }
+
         [ForeignKey("Rc_Details")]
         public string RC_No { get; set; }
         public RC Rc_Details { get; set; }

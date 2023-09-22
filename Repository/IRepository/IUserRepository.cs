@@ -10,6 +10,9 @@ namespace Use_Wheels.Repository.IRepository
 
         // Method to register a new user
         Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO);
+
+        // Method to unblack a seller
+        Task<int> UnblackSeller(string username);
     }
 }
 

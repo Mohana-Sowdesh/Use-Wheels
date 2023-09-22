@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Use_Wheels.Models.DTO
+﻿namespace Use_Wheels.Models.DTO
 {
 	public class Car
 	{
@@ -14,13 +10,13 @@ namespace Use_Wheels.Models.DTO
         [RegularExpression("^[1-9]\\d*$")]
         [ForeignKey("Category")]
         public int Category_Id { get; set; }
-        //Navigation property
+        // Navigation property
         public Category Category { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        public string Availability { get; set; } = "available";
+        public bool Availability { get; set; } = true;
 
         [Required]
         [RegularExpression("[1-9]")]

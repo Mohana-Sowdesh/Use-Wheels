@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Use_Wheels.Controllers
 {
-    [Route("user/wishlist")]
+    [Route("/wishlist")]
     [ApiController]
     [Authorize(Roles = Constants.Roles.CUSTOMER)]
     public class UserWishlistController : ControllerBase
@@ -32,17 +32,11 @@ namespace Use_Wheels.Controllers
 
             if (userWishlist == null || userWishlist.Count() == 0)
             {
-                Log.Error(Constants.WishlistConstants.NO_CARS_PRESENT);
-                _response.StatusCode = HttpStatusCode.OK;
-                _response.IsSuccess = true;
+                //Log.Error(Constants.WishlistConstants.NO_CARS_PRESENT);
                 _response.Result = Constants.WishlistConstants.NO_CARS_PRESENT;
             }
             else
-            {
-                _response.StatusCode = HttpStatusCode.OK;
-                _response.IsSuccess = true;
                 _response.Result = userWishlist;
-            }
             return Ok(_response);
         }
 
@@ -61,7 +55,6 @@ namespace Use_Wheels.Controllers
 
             Log.Information("List contents: {@Names}", WishListRepository.GetUserWishlist(username));
             _response.Result = Constants.WishlistConstants.ADD_CAR_SUCCESS;
-            _response.StatusCode = HttpStatusCode.Created;
             return Ok(_response);
         }
 
@@ -81,8 +74,6 @@ namespace Use_Wheels.Controllers
             string username = HttpContext.User.Identity.Name;
             _service.DeleteElementFromWishList(vehicle_no, username);
             
-            _response.StatusCode = HttpStatusCode.NoContent;
-            _response.IsSuccess = true;
             _response.Result = Constants.WishlistConstants.DELETE_CAR_SUCCESS;
             return Ok(_response);
         }

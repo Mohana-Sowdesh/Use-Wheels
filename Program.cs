@@ -10,6 +10,7 @@ using StackExchange.Redis;
 using Use_Wheels.Auth;
 using Use_Wheels.Services;
 using Microsoft.AspNetCore.Diagnostics;
+using Quartz;
 
 // Sets up the builder object for creating a web application
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,7 @@ builder.Services.AddControllers(option => {
     option.CacheProfiles.Add(Constants.Configurations.CACHE_PROFILE_NAME,
        new CacheProfile()
        {
-           Duration = 20
+           Duration = 520
        });
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
@@ -76,12 +77,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IAdminCarServices, AdminCarServices>();
-builder.Services.AddScoped<IAdminCategoriesServices, AdminCategoriesServices>();
-builder.Services.AddScoped<IUserCarServices, UserCarServices>();
-builder.Services.AddScoped<IUserCategoriesServices, UserCategoriesServices>();
-builder.Services.AddScoped<IUserOrderServices, UserOrderServices>();
+builder.Services.AddScoped<ICarServices, CarServices>();
+builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
 builder.Services.AddScoped<IUserWishlistServices, UserWishlistServices>();
+builder.Services.AddScoped<IMockAPIUtility, MockAPIUtility>();
 
 // Sets up Auto mapper
 builder.Services.AddAutoMapper(typeof(MappingConfig));
@@ -126,6 +126,21 @@ builder.Services.AddSwaggerGen(options =>
     })
 );
 
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+    var jobKey = new JobKey("CronJob");
+    q.AddJob<CronJob>(opts => opts.WithIdentity(jobKey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("DemoJob-trigger")
+        .WithCronSchedule("* 30 * * * ?"));
+
+});
+
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
 // Prepares the application to start handling HTTP requests after all setup work is completed
 var app = builder.Build();
 
@@ -154,12 +169,14 @@ app.UseExceptionHandler(builder =>
 
         if (exception is BadHttpRequestException)
         {
+            Log.Error("BadHttpRequestException : " + exception.Message);
             var obj = (BadHttpRequestException)exception;
             context.Response.StatusCode = obj.StatusCode;
             await context.Response.WriteAsJsonAsync(obj.Message);
         }
         else
         {
+            Log.Error("Internal Server Error : " + exception.Message);
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             var response = new { error = exception.Message };
             await context.Response.WriteAsJsonAsync(response);

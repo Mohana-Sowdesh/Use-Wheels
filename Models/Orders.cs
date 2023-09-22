@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Use_Wheels.Models.DTO
+﻿namespace Use_Wheels.Models.DTO
 {
 	public class Orders
 	{
@@ -12,10 +8,12 @@ namespace Use_Wheels.Models.DTO
 
 		[ForeignKey("Email")]
 		public string Email { get; set; }
-		public UserDTO User;
+		public User User { get; set; }
 
 		[ForeignKey("Vehicle ID")]
 		public string Vehicle_No { get; set; }
+
+		public float Gross_Price { get; set; }
 
 		public float Net_Price { get; set; }
 

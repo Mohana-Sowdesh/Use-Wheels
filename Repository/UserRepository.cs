@@ -1,33 +1,29 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Net;
-using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-using System.Web.Http;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Use_Wheels.Repository
 {
-	public class UserRepository : IUserRepository
-	{
+    public class UserRepository : IUserRepository
+    {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private string secretKey;
         private readonly IMapper _mapper;
-        private readonly ILogger<IUserRepository> _logger;
 
         public UserRepository(ApplicationDbContext db, IConfiguration configuration,
-            UserManager<User> userManager, IMapper mapper, RoleManager<IdentityRole> roleManager, ILogger<UserRepository> logger)
+            UserManager<User> userManager, IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
             _mapper = mapper;
             _userManager = userManager;
             secretKey = configuration.GetValue<string>(Constants.Configurations.JWT_SECRET_CONFIGURATION_KEY);
             _roleManager = roleManager;
-            _logger = logger;
         }
 
         // Method log in a user
@@ -47,6 +43,12 @@ namespace Use_Wheels.Repository
                 };
             }
 
+            if(user.isBlacked == true)
+                throw new BadHttpRequestException(Constants.LoginConstants.USER_IS_BLACKED, Constants.ResponseConstants.BAD_REQUEST);
+
+            user.Last_Login = DateTime.Now;
+            _db.Users.Update(user);
+            await _db.SaveChangesAsync();
             //if user was found generate JWT Token
             var roles = await _userManager.GetRolesAsync(user);
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -75,7 +77,7 @@ namespace Use_Wheels.Repository
 
         // Method to register a new user
         public async Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO)
-        { 
+        {
             User user = _mapper.Map<User>(registerationRequestDTO);
             RegisterUtility registerUtility = new RegisterUtility(_db);
             registerUtility.ValidateNewRegisterationRequest(registerationRequestDTO);
@@ -83,12 +85,13 @@ namespace Use_Wheels.Repository
             var result = await _userManager.CreateAsync(user, registerationRequestDTO.Password);
             if (result.Succeeded)
             {
-                if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
+                if (!_roleManager.RoleExistsAsync("seller").GetAwaiter().GetResult())
                 {
                     await _roleManager.CreateAsync(new IdentityRole("admin"));
                     await _roleManager.CreateAsync(new IdentityRole("customer"));
+                    await _roleManager.CreateAsync(new IdentityRole("seller"));
                 }
-                await _userManager.AddToRoleAsync(user, "customer");
+                await _userManager.AddToRoleAsync(user, registerationRequestDTO.Role);
                 var userToReturn = _db.Users.FirstOrDefault(u => u.UserName == registerationRequestDTO.Username);
                 return _mapper.Map<UserDTO>(userToReturn);
             }
@@ -97,6 +100,20 @@ namespace Use_Wheels.Repository
                 Console.WriteLine(result.Errors.ToList());
             }
             return new UserDTO();
+        }
+
+        // Method to unblack a seller
+        public async Task<int> UnblackSeller(string username)
+        {
+            User user = _db.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+                return -1;
+
+            user.isBlacked = false;
+            _db.Users.Update(user);
+            await _db.SaveChangesAsync();
+            return 1;
         }
     }
 }

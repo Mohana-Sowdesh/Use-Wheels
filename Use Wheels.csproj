@@ -35,6 +35,8 @@
     <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.32.2" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.32.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Quartz" Version="3.7.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +51,7 @@
     <None Remove="Services\" />
     <None Remove="Services\IServices\" />
     <None Remove="Utility\" />
+    <None Remove="Utility\IUtilities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -62,5 +65,6 @@
     <Folder Include="Services\" />
     <Folder Include="Services\IServices\" />
     <Folder Include="Utility\" />
+    <Folder Include="Utility\IUtilities\" />
   </ItemGroup>
 </Project>

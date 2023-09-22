@@ -1,7 +1,4 @@
-﻿using System;
-using Use_Wheels.Models.DTO;
-
-namespace Use_Wheels.Utility
+﻿namespace Use_Wheels.Utility
 {
 	public class RegisterUtility
 	{

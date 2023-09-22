@@ -1,9 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Use_Wheels.Data;
-using Use_Wheels.Repository.IRepository;
 
 namespace Use_Wheels.Repository
 {

@@ -16,7 +16,7 @@ namespace Use_Wheels.Models.DTO
 
         public string Description { get; set; }
 
-        public string Availability { get; set; }
+        public bool Availability { get; set; }
 
         [Required]
         [RegularExpression("[1-9]")]

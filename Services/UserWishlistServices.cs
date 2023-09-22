@@ -19,7 +19,7 @@
         public async Task AddToWishlist(string vehicle_no, string username)
         {
             Car car = await _dbCar.GetAsync(u => u.Vehicle_No == vehicle_no, includeProperties: "Rc_Details");
-            if (car == null || car.Availability == Constants.OrderConstants.SOLD)
+            if (car == null || car.Availability == false)
                 throw new BadHttpRequestException(Constants.CarConstants.VEHICLE_NOT_FOUND, Constants.ResponseConstants.BAD_REQUEST);
 
             bool isUserInWishlist = WishListRepository.IsUserExists(username);

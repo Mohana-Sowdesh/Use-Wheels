@@ -7,11 +7,12 @@ namespace Use_Wheels.Controllers
     [Route("/cars")]
     [ApiController]
     public class CarController : ControllerBase
-	{
+    {
         protected APIResponseDTO _response;
         private readonly ICarServices _service;
         private readonly IMemoryCache _cache;
-        private const string AllCarsCacheKey = "AllCars";
+        private const string AllUserCarsCacheKey = "AllUserCars";
+        private const string AllAdminCarsCacheKey = "AllAdminCars";
 
         public CarController(ICarServices service, IMemoryCache cache)
         {
@@ -27,17 +28,29 @@ namespace Use_Wheels.Controllers
         /// <returns>APIResponse object consisting list of <see cref="Car"/>Car with RC details</returns>
         [HttpGet]
         [Authorize]
-        [ResponseCache(CacheProfileName = Constants.Configurations.CACHE_PROFILE_NAME)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponseDTO>> GetAllCars()
         {
             string role = HttpContext.User.Identities.First().Claims.ElementAt(1).Value;
-            IEnumerable<CarDTO> carList = await _service.GetAllCars(role);
+            IEnumerable<CarResponseDTO> carList = await _service.GetAllCars(role);
 
-            if (!_cache.TryGetValue(AllCarsCacheKey, out IEnumerable<Car> cars))
+            if(role == "admin")
             {
-                // Add data to cache with a cache key and a short duration
-                _cache.Set(AllCarsCacheKey, carList, TimeSpan.FromSeconds(30));
+                carList = _cache.Get<IEnumerable<CarResponseDTO>>(AllAdminCarsCacheKey);
+                if(carList == null)
+                {
+                    carList = await _service.GetAllCars(role);
+                    _cache.Set(AllAdminCarsCacheKey, carList, TimeSpan.FromSeconds(Constants.CarConstants.CAR_CACHE_EXPIRATION));
+                }
+            }
+            else
+            {
+                carList = _cache.Get<IEnumerable<CarResponseDTO>>(AllUserCarsCacheKey);
+                if (carList == null)
+                {
+                    carList = await _service.GetAllCars(role);
+                    _cache.Set(AllUserCarsCacheKey, carList, TimeSpan.FromSeconds(Constants.CarConstants.CAR_CACHE_EXPIRATION));
+                }
             }
 
             _response.Result = carList;
@@ -81,7 +94,9 @@ namespace Use_Wheels.Controllers
             string username = HttpContext.User.Identity.Name;
             Car car = await _service.AddCar(carDTO, username);
 
-            _cache.Remove(AllCarsCacheKey);
+            // Cache invalidation
+            _cache.Remove(AllAdminCarsCacheKey);
+            _cache.Remove(AllUserCarsCacheKey);
 
             _response.Result = car;
             return CreatedAtRoute("GetCar", new { vehicle_no = car.Vehicle_No }, _response);
@@ -101,9 +116,12 @@ namespace Use_Wheels.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponseDTO>> DeleteCar(string vehicle_no)
         {
-                await _service.DeleteCar(vehicle_no);
-                // Cache invalidation
-                _cache.Remove(AllCarsCacheKey);
+            await _service.DeleteCar(vehicle_no);
+
+            // Cache invalidation
+            _cache.Remove(AllAdminCarsCacheKey);
+            _cache.Remove(AllUserCarsCacheKey);
+
             return NoContent();
         }
 
@@ -122,7 +140,8 @@ namespace Use_Wheels.Controllers
             await _service.UpdateCar(vehicle_no, carUpdateDTO);
 
             // Cache invalidation
-            _cache.Remove(AllCarsCacheKey);
+            _cache.Remove(AllAdminCarsCacheKey);
+            _cache.Remove(AllUserCarsCacheKey);
 
             return NoContent();
         }

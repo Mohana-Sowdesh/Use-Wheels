@@ -10,12 +10,10 @@ namespace Use_Wheels.Controllers
 	{
         protected APIResponseDTO _response;
         private readonly ICategoriesServices _service;
-        private const string AllCategoriesCacheKey = "AllCategories";
         private readonly IMemoryCache _cache;
 
-        public CategoriesController(ICategoriesServices service, IMemoryCache cache)
+        public CategoriesController(ICategoriesServices service)
 		{
-            _cache = cache;
             _service = service;
             _response = new();
         }
@@ -28,15 +26,9 @@ namespace Use_Wheels.Controllers
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ResponseCache(CacheProfileName = Constants.Configurations.CACHE_PROFILE_NAME)]
-        public async Task<ActionResult<APIResponseDTO>> GetAllCategories(string role)
+        public async Task<ActionResult<APIResponseDTO>> GetAllCategories()
         {
             IEnumerable<Category> categoryList = await _service.GetAllCategories();
-
-            if (!_cache.TryGetValue(AllCategoriesCacheKey, out IEnumerable<Category> categories))
-            {
-                // Add data to cache with a cache key and a short duration
-                _cache.Set(AllCategoriesCacheKey, categoryList, TimeSpan.FromSeconds(30));
-            }
 
             _response.Result = categoryList;
             return Ok(_response);
@@ -55,9 +47,6 @@ namespace Use_Wheels.Controllers
         public async Task<ActionResult<APIResponseDTO>> CreateCategory([FromBody] CategoryDTO categoryDTO)
         {
             Category category = await _service.CreateCategory(categoryDTO);
-
-            // Cache invalidation
-            _cache.Remove(AllCategoriesCacheKey);
 
             _response.Result = category;
             return CreatedAtRoute("GetCategory", new { id = category.Category_Id }, _response);
@@ -78,9 +67,6 @@ namespace Use_Wheels.Controllers
         public async Task<ActionResult<APIResponseDTO>> DeleteCategory(int id)
         {
             await _service.DeleteCategory(id);
-
-            // Cache invalidation
-            _cache.Remove(AllCategoriesCacheKey);
             return NoContent();
         }
     }

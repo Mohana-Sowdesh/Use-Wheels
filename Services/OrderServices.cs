@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Use_Wheels.Models.DTO;
-using Use_Wheels.Utility;
+using Microsoft.AspNetCore.Identity;
 
 namespace Use_Wheels.Services
 {
@@ -12,14 +11,16 @@ namespace Use_Wheels.Services
         private readonly IMockAPIUtility _apiUtility;
         private readonly IMapper _mapper;
         AdminCarUtility adminCarUtility = new AdminCarUtility();
+        private readonly UserManager<User> _userManager;
 
-        public OrderServices(ApplicationDbContext db, IOrderRepository dbOrder, ICarRepository dbCar, IMapper mapper, IMockAPIUtility apiUtility)
+        public OrderServices(ApplicationDbContext db, IOrderRepository dbOrder, ICarRepository dbCar, IMapper mapper, IMockAPIUtility apiUtility, UserManager<User> userManager)
 		{
             _db = db;
             _dbCar = dbCar;
             _mapper = mapper;
             _dbOrder = dbOrder;
             _apiUtility = apiUtility;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace Use_Wheels.Services
         /// <returns>List of <see cref="Category"/>categories</returns>
         public async Task<Orders> CreateOrder(OrderDTO orderDTO)
         {
-            var userEmail = _db.Users.FirstOrDefault(x => x.Email == orderDTO.Email);
+            var userEmail = await _userManager.FindByEmailAsync(orderDTO.Email);
             if (userEmail == null)
                 throw new BadHttpRequestException(Constants.OrderConstants.EMAIL_DOES_NOT_EXISTS, Constants.ResponseConstants.BAD_REQUEST);
 
